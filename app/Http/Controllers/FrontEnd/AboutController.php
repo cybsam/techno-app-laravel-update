@@ -254,4 +254,8 @@ class AboutController extends Controller
             abort(404);
         }
     }
+
+    public function addLoader(){
+        return "view";
+    }
 }

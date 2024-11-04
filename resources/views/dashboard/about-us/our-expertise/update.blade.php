@@ -33,6 +33,10 @@
                                 <label for="">Description or education</label>
                                 <textarea name="expertise_description" class="form-control" id="summernote" cols="30" rows="10">{{ $fetchExpertData->expertise_description }}</textarea>
                             </div>
+                            <div class="d-grid gap-2 col-6 mx-auto">
+                                <button type="submit" class="btn btn-outline-warning text-black">Update Expertise</button>
+                            </div>
+
                         </form>
                     </div>
                 </div>

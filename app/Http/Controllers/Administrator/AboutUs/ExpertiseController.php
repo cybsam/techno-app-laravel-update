@@ -47,4 +47,8 @@ class ExpertiseController extends Controller
             about(403);
         }
     }
+
+    public function expertiseUpdatePost(Request $request){
+        dd($request->all());
+    }
 }

@@ -34,6 +34,7 @@
             <div class="button-group">
                 <a href="mailto:{{ $getData->sender_email }}" class="btn btn-primary">Email</a>
                 <a href="tel:{{ $getData->sender_number }}" class="btn btn-info">Call</a>
+                <a class="btn btn-danger" href="{{ route('supUser.FrontEndContactDelete',['id'=>$getData->id]) }}"><i class="bi bi-trash3"></i> Delete</a>
                 <div class="float-right">
                     <p>Sender IP: <b>{{ $getData->sender_ip }}</b></p>
                 </div>

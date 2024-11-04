@@ -158,6 +158,7 @@ Route::prefix('en/Administrator')->middleware(['auth:web','isAdmin','preventback
     //contact
     Route::get('contact/front',[App\Http\Controllers\Administrator\DashboardController::class, 'ContactFrontEnd'])->name('supUser.FrontEndContact');
     Route::get('contact/front/{id}/show',[App\Http\Controllers\Administrator\DashboardController::class, 'ContactFrontEndShow'])->name('supUser.FrontEndContactShow');
+    Route::get('contact/front/{id}/delete',[App\Http\Controllers\Administrator\DashboardController::class, 'contactFrontDelete'])->name('supUser.FrontEndContactDelete');
     
     // cybsam dev
     Route::get('cybsam-shuvo-mr-robot-dev',[DashboardController::class, 'cybsamdevShuvo'])->name('dashboard.shuvodev');

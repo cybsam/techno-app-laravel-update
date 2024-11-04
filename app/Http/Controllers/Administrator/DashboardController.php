@@ -123,6 +123,16 @@ class DashboardController extends Controller
         ]);
     }
 
+    public function contactFrontDelete(Request $request, $id){
+        $id = $id;
+        $deleteMsg = FrontContact::where('id',$id)->delete();
+        if ($deleteMsg) {
+            return redirect()->route('supUser.FrontEndContact')->with('msgDltDone','Message Delete Done!');
+        }else{
+            return redirect()->route('supUser.FrontEndContact')->with('msgDltErr','Something went wrong!');
+        }
+    }
+
     public function frontSliderImage(){
         return view('dashboard.settings.front-slider.index');
     }

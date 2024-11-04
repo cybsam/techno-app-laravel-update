@@ -23,8 +23,8 @@ class UsersController extends Controller
 {
     public function index(){
         $listAllUsers = User::all()->reverse();
-        $users = User::where('role_int',0)->where('role','user')->get()->reverse();
-        $Admin = User::where('role_int',1)->where('role','admin')->get()->reverse();
+        $users = User::where('role_int',0)->where('role','user')->where('is_active','1')->get()->reverse();
+        $Admin = User::where('role_int',1)->where('role','admin')->where('is_active','1')->get()->reverse();
 
         return view('dashboard.users.index',[
             'users'=>$users,

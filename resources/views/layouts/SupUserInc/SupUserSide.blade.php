@@ -171,15 +171,11 @@
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a href="{{ route('Administrator.UserArchiveListSh') }}">
                             <i class="bi bi-circle"></i><span>Archive Users</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="">
-                            <i class="bi bi-circle"></i><span>Block Users</span>
-                        </a>
-                    </li>
+                    
                 </ul>
             </li>
 

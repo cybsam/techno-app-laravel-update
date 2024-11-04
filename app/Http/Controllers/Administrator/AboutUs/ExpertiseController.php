@@ -68,4 +68,14 @@ class ExpertiseController extends Controller
         }
 
     }
+
+    public function expertiseDelete(Request $request, $exper_id){
+        $expertId = $exper_id;
+        $fetchExpertData = Expertise::where('id',$expertId)->delete();
+        if ($fetchExpertData) {
+            return redirect()->back()->with('expError','Expertise Delete successfully!');
+        }else {
+            return redirect()->back()->with('expSuccess','Something went wrong!');
+        }
+    }
 }

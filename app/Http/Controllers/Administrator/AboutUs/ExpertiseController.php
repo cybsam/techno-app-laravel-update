@@ -35,4 +35,16 @@ class ExpertiseController extends Controller
         }
         
     }
+
+    public function expertiseUpdate(Request $request, $exper_id){
+        $expertId = $exper_id;
+        $fetchExpertData = Expertise::where('id',$expertId)->first();
+        if ($fetchData) {
+            return view('dashboard.about-us.our-expertise.update',[
+                'fetchExpertData'=>$fetchExpertData
+            ]);
+        }else {
+            about(403);
+        }
+    }
 }

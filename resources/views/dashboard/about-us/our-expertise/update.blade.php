@@ -23,16 +23,15 @@
                         <div class="card-title">
                             Expertise Update
                         </div>
-                        <form action="" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('SupUser.OurExpertiseUpdatePost') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="">Expertise Name</label>
-                                <input type="text" name="" value="{{ $fetchExpertData->expertise_name }}" class="form-control">
+                                <input type="text" name="expertise_name" value="{{ $fetchExpertData->expertise_name }}" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="">Expertise Name</label>
-                                {{-- <input type="text" name="" value="{{ $fetchExpertData->expertise_name }}" class="form-control"> --}}
-                                <textarea name="summernote" class="form-control" id="summernote" cols="30" rows="10">{{ $fetchExpertData->expertise_description }}</textarea>
+                                <label for="">Description or education</label>
+                                <textarea name="expertise_description" class="form-control" id="summernote" cols="30" rows="10">{{ $fetchExpertData->expertise_description }}</textarea>
                             </div>
                         </form>
                     </div>

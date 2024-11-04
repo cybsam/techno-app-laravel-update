@@ -34,7 +34,7 @@ Route::prefix('en/Administrator')->middleware(['auth:web','isAdmin','preventback
     
     Route::get('User/Archive/list',[App\Http\Controllers\Administrator\UsersController::class, 'archiveList'])->name('Administrator.UserArchiveListSh');
     Route::post('User/Update/Status',[App\Http\Controllers\Administrator\UsersController::class, 'is_active'])->name('SupUser.UserIsActive');
-    Route::post('User/Delete',[App\Http\Controllers\Administrator\UsersController::class, 'softDeleteUser'])->name('SupUser.UserSoftDel');
+    Route::get('User/{user_id}/Delete',[App\Http\Controllers\Administrator\UsersController::class, 'usersDelete'])->name('Administrator.UserDelete');
 
     //end user
     

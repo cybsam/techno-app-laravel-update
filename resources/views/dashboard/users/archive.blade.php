@@ -75,7 +75,7 @@
                                                 <a onclick="alert('restoring...')" href="{{ route('Administrator.UsersRestoreUser', ['user_id' => $archiveDataSh->id, 'user_name' => $archiveDataSh->name]) }}"
                                                     class="btn btn-primary"><i class="bi bi-arrow-counterclockwise"></i></a>
                                                 <a onclick="alert('Permanent deleting...')"
-                                                    href="{{ route('Administrator.UsersSoftDelete', ['user_id' => $archiveDataSh->id]) }}"
+                                                    href="{{ route('Administrator.UserDelete', ['user_id' => $archiveDataSh->id]) }}"
                                                     class="btn btn-danger"><i class="bi bi-trash"
                                                         aria-hidden="true"></i></a>
 

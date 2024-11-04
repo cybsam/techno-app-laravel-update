@@ -173,7 +173,7 @@
                 <h5 class="modal-title" id="exampleModalLabel">Delete User</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ route('SupUser.UserSoftDel') }}" method="post" enctype="multipart/form-data">
+            <form action="" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body text-danger">
                     Are You sure want to delete this user? <span class="text-danger"><i class="bi bi-person-fill-x" aria-hidden="true"></i></span>

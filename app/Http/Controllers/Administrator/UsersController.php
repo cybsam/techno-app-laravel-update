@@ -227,7 +227,7 @@ class UsersController extends Controller
     public function UsersSoftDel(Request $request, $user_id){
         $userId = $user_id;
         $value = 0;
-        $softDelete = User::where('id',$request->user_id)->update([
+        $softDelete = User::where('id',$userId)->update([
             'is_active'=>$value
         ]);
         if ($softDelete) {
@@ -253,11 +253,26 @@ class UsersController extends Controller
     public function usersRestore(Request $request, $user_id){
         $userId = $user_id;
         $value = 1;
-        $softDelete = User::where('id',$request->user_id)->update([
+        $userRestore = User::where('id',$userId)->update([
             'is_active'=>$value
         ]);
-        if ($softDelete) {
+        if ($userRestore) {
             return redirect()->back()->with('restoreUsers','Users restore done, check!');
+        }else {
+            return redirect()->back()->with('restoreProblem','Something went wrong!');
+        }
+    }
+
+    public function usersDelete(Request $request, $user_id){
+        $userId = $user_id;
+
+        $usersData = User::where('id',$userId)->first();
+        $imageLocation = base_path('public/image/users/'.$usersData->user_image);
+        unlink($imageLocation);
+
+        $deleteUser = User::where('id',$userId)->delete();
+        if ($deleteUser) {
+            return redirect()->back()->with('restoreUsers','User deleted...');
         }else {
             return redirect()->back()->with('restoreProblem','Something went wrong!');
         }

@@ -18,6 +18,9 @@ class DashboardController extends Controller
     }
 
     public function updateUsers(){
+
+
         return "update to this user";
+
     }
 }

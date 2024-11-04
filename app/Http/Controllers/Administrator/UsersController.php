@@ -236,4 +236,19 @@ class UsersController extends Controller
             return redirect()->back()->with('regErroradmin','Something went wrong!');
         }
     }
+
+    public function archiveList(){
+        $value = 0;
+        $archiveData = User::where('is_active',$value)->get()->reverse();
+
+        if ($archiveData) {
+            return view('dashboard.users.archive',[
+                'archiveData'=>$archiveData
+            ]);
+        }else{
+            abort(403);
+        }
+    }
+
+    
 }

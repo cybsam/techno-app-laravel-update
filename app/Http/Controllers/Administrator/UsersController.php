@@ -250,5 +250,16 @@ class UsersController extends Controller
         }
     }
 
-    
+    public function usersRestore(Request $request, $user_id){
+        $userId = $user_id;
+        $value = 1;
+        $softDelete = User::where('id',$request->user_id)->update([
+            'is_active'=>$value
+        ]);
+        if ($softDelete) {
+            return redirect()->back()->with('restoreUsers','Users restore done, check!');
+        }else {
+            return redirect()->back()->with('restoreProblem','Something went wrong!');
+        }
+    }
 }

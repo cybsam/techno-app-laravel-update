@@ -17,6 +17,20 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
+                        @if (Session::get('restoreUsers'))
+                            <div class="alert alert-primary bg-primary text-light border-0 alert-dismissible fade show" role="alert">
+                                {{ Session::get('restoreUsers') }}
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        @endif
+                        @if (Session::get('restoreProblem'))
+                            <div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show" role="alert">
+                                {{ Session::get('restoreProblem') }}
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        @endif
                         <table class="table table-hover datatable table-sm">
                             <thead>
                                 <tr>

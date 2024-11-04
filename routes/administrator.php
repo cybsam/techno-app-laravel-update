@@ -30,7 +30,7 @@ Route::prefix('en/Administrator')->middleware(['auth:web','isAdmin','preventback
     Route::get('User/Update/{user_id}/{user_name}',[App\Http\Controllers\Administrator\UsersController::class, 'updateUser'])->name('Administrator.UpdateUser');
     Route::post('User/Update/Sub/Post',[App\Http\Controllers\Administrator\UsersController::class, 'updateUserSub'])->name('Administrator.UpdateUserDonePo');
     Route::get('User/delete/{user_id}/soft/',[App\Http\Controllers\Administrator\UsersController::class, 'UsersSoftDel'])->name('Administrator.UsersSoftDelete');
-    // Route::get('User/restore/{user_id}/soft/',[App\Http\Controllers\Administrator\UsersController::class, 'usersRestore'])->name('Administrator.UsersRestoreUser');
+    Route::get('User/restore/{user_id}/soft/',[App\Http\Controllers\Administrator\UsersController::class, 'usersRestore'])->name('Administrator.UsersRestoreUser');
     
     Route::get('User/Archive/list',[App\Http\Controllers\Administrator\UsersController::class, 'archiveList'])->name('Administrator.UserArchiveListSh');
     Route::post('User/Update/Status',[App\Http\Controllers\Administrator\UsersController::class, 'is_active'])->name('SupUser.UserIsActive');

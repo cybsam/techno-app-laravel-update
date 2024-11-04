@@ -223,4 +223,17 @@ class UsersController extends Controller
             }
         }
     }
+    
+    public function UsersSoftDel(Request $request, $user_id){
+        $userId = $user_id;
+        $value = 0;
+        $softDelete = User::where('id',$request->user_id)->update([
+            'is_active'=>$value
+        ]);
+        if ($softDelete) {
+            return redirect()->back()->with('regSuccAdmin','Users Archive done, check archive folder!');
+        }else {
+            return redirect()->back()->with('regErroradmin','Something went wrong!');
+        }
+    }
 }

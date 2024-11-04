@@ -98,12 +98,7 @@
                                         <div class="btn-group" role="group">
                                             
                                             <a href="{{ route('Administrator.UpdateUser', ['user_id' => $users->id, 'user_name'=>$users->name]) }}" class="btn btn-warning"><i class="bi bi-pencil-square" aria-hidden="true"></i></a>
-                                            {{-- <a href="" class="btn btn-danger"><i class="bi bi-trash" aria-hidden="true"></i></a> --}}
-                                            {{-- <button type="button" value="{{ $users->id }}" data-bs-toggle="modal" data-bs-target="#usersArchiveModelSh" class="btn btn-danger usersArchiveModel"><i class="bi bi-trash" aria-hidden="true"></i></button> --}}
-                                            <button type="button" data-bs-toggle="modal" data-bs-target="#deleteUsermodal" data-user-id="{{ $users->id }}" class="btn btn-danger">
-                                                <i class="bi bi-trash" aria-hidden="true"></i>
-                                            </button>
-                                            
+                                            <a onclick="alert('user deleting...')" href="{{ route('Administrator.UsersSoftDelete',['user_id'=>$users->id]) }}" class="btn btn-danger"><i class="bi bi-trash" aria-hidden="true"></i></a>    
                                         </div>
                                         
                                     </td>
@@ -167,7 +162,8 @@
                                     <td>
                                         <div class="btn-group" role="group">
                                             <a href="{{ route('Administrator.UpdateUser', ['user_id' => $admin->id, 'user_name'=>$admin->name]) }}" class="btn btn-warning"><i class="bi bi-pencil-square" aria-hidden="true"></i></a>
-                                            <a href="" class="btn btn-danger"><i class="bi bi-trash" aria-hidden="true"></i></a>
+                                            <a onclick="alert('admin deleting...')" href="{{ route('Administrator.UsersSoftDelete',['user_id'=>$admin->id]) }}" class="btn btn-danger"><i class="bi bi-trash" aria-hidden="true"></i></a>
+                                            
                                         </div>
                                         
 

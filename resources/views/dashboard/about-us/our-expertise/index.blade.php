@@ -50,8 +50,8 @@
                             <td>{{ Str::limit($fetchExpertise->expertise_description, 100) }}</td>
                             <td>
                                 <div class="button-group">
-                                    <a href="" class="btn btn-secondary btn-sm"><i class="bi bi-pencil-square" aria-hidden="true"></i></a>
-                                    <a href="" class="btn btn-danger btn-sm"><i class="bi bi-trash" aria-hidden="true"></i></a>
+                                    <a href="{{ route('SupUser.OurExpertiseUpdate',['exper_id'=>$fetchExpertise->id]) }}" class="btn btn-secondary btn-sm"><i class="bi bi-pencil-square" aria-hidden="true"></i></a>
+                                    <a href="{{ route('SupUser.OurExpertiseDelete',['exper_id'=>$fetchExpertise->id]) }}" class="btn btn-danger btn-sm"><i class="bi bi-trash" aria-hidden="true"></i></a>
                                 </div>
                             </td>
                         </tr>

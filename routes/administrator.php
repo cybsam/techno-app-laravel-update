@@ -58,8 +58,8 @@ Route::prefix('en/Administrator')->middleware(['auth:web','isAdmin','preventback
 
     Route::get('About-us/our-expertise',[App\Http\Controllers\Administrator\AboutUs\ExpertiseController::class, 'expertiseIndex'])->name('SupUser.OurExpertiseIndex');
     Route::post('About-us/our-expertise/store',[App\Http\Controllers\Administrator\AboutUs\ExpertiseController::class, 'expertiseStore'])->name('SupUser.OurExpertiseStore');
-    Route::post('About-us/our-expertise/update',[App\Http\Controllers\Administrator\AboutUs\ExpertiseController::class, 'expertiseUpdate'])->name('SupUser.OurExpertiseUpdate');
-    Route::post('About-us/our-expertise/delete',[App\Http\Controllers\Administrator\AboutUs\ExpertiseController::class, 'expertiseDelete'])->name('SupUser.OurExpertiseDelete');
+    Route::get('About-us/our-expertise/{exper_id}/update',[App\Http\Controllers\Administrator\AboutUs\ExpertiseController::class, 'expertiseUpdate'])->name('SupUser.OurExpertiseUpdate');
+    Route::get('About-us/our-expertise/{exper_id}/delete',[App\Http\Controllers\Administrator\AboutUs\ExpertiseController::class, 'expertiseDelete'])->name('SupUser.OurExpertiseDelete');
 
     Route::get('About-us/Strategic-Partners/Index',[App\Http\Controllers\Administrator\AboutUs\StrategicPartnersController::class, 'IndexPartners'])->name('SupUser.OurStrategicPartners');
     Route::get('About-us/Strategic-Partners/Insert',[App\Http\Controllers\Administrator\AboutUs\StrategicPartnersController::class, 'InsertPartners'])->name('SupUser.OurStrategicPartnersInsert');

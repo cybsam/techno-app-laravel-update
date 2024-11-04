@@ -46,9 +46,9 @@
             @foreach ($showContact as $key => $contactU)
                 <tr class="@if($contactU->is_seen == 1)text-muted @endif">
                     <td>{{ $contactU->id }}</td>
-                    <td>{{ $contactU->sender_name }}</td>
+                    <td><a href="{{ route('supUser.FrontEndContactShow',['id'=>$contactU->id]) }}">{{ $contactU->sender_name }}</a></td>
                     <td><a href="mailto:{{ $contactU->sender_email }}">{{ $contactU->sender_email }}</a></td>
-                    <td>{{ Str::limit($contactU->sender_subject, 20) }}</td>
+                    <td><a href="{{ route('supUser.FrontEndContactShow',['id'=>$contactU->id]) }}" >{{ Str::limit($contactU->sender_subject, 20) }}</a></td>
                     <td>
                         <div class="btn-group" role="group">
                             <a class="btn btn-primary btn-sm" href="{{ route('supUser.FrontEndContactShow',['id'=>$contactU->id]) }}"><i class="bi bi-eye"></i></a>

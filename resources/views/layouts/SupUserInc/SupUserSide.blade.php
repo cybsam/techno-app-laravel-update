@@ -245,12 +245,12 @@
                 </ul>
             </li>
             <li class="nav-heading">Pages</li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link collapsed" href="pages-faq.html">
                     <i class="bi bi-question-circle"></i>
                     <span>F.A.Q</span>
                 </a>
-            </li>
+            </li> --}}
             @php
                 $countUnSeenMsg = DB::table('front_contacts')->where('is_seen',0)->count();
             @endphp

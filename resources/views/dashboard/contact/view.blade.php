@@ -18,7 +18,7 @@
 
     <div class="card">
         <div class="card-header">
-            {{ _('Message From: ') }} <b>{{ $getData->sender_name }}</b>
+            {{ __('Message From: ') }} <b>{{ $getData->sender_name }}</b>
             <div class="float-right">
                 <a href="{{ URL::previous() }}" class="btn btn-primary">Previous Page</a>
             </div>

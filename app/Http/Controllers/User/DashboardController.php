@@ -16,4 +16,11 @@ class DashboardController extends Controller
     public function activity(Request $request){
         return "alert to this users";
     }
+
+    public function updateUsers(){
+
+
+        return "update to this user";
+
+    }
 }

@@ -49,6 +49,23 @@ class ExpertiseController extends Controller
     }
 
     public function expertiseUpdatePost(Request $request){
-        dd($request->all());
+        // dd($request->all());
+        $request->validate([
+            'id'=>['required'],
+            'expertise_name'=>['required','string'],
+            'expertise_description'=>['required','string']
+        ]);
+
+        $updateData = Expertise::where('id',$request->input('id'))->update([
+            'expertise_name'=>$request->input('expertise_name'),
+            'expertise_description'=>$request->input('expertise_description')
+        ]);
+
+        if ($updateData) {
+            return redirect()->back()->with('expertiseUpdSuc','Expertise update successfully!');
+        }else {
+            return redirect()->back()->with('expertiseUpdateFail','Expertise update failed!');
+        }
+
     }
 }

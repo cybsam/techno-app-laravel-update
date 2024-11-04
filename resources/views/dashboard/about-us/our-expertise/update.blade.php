@@ -23,6 +23,27 @@
                         <div class="card-title">
                             Expertise Update
                         </div>
+                        <div class="text-info">
+                            @if (Session::get('expertiseUpdSuc'))
+                                <div class="alert alert-primary bg-primary text-light border-0 alert-dismissible fade show"
+                                    role="alert">
+                                    {{ Session::get('expertiseUpdSuc') }}
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                
+                            @endif
+                        </div>
+                        <div class="text-danger">
+                            @if (Session::get('expertiseUpdateFail'))
+                            <div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show" role="alert">
+                                {{ Session::get('expertiseUpdateFail') }}
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                            
+                            @endif
+                        </div>
                         <form action="{{ route('SupUser.OurExpertiseUpdatePost') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
@@ -32,6 +53,7 @@
                             <div class="form-group">
                                 <label for="">Description or education</label>
                                 <textarea name="expertise_description" class="form-control" id="summernote" cols="30" rows="10">{{ $fetchExpertData->expertise_description }}</textarea>
+                                <input type="hidden" name="id" value="{{ $fetchExpertData->id }}">
                             </div>
                             <div class="d-grid gap-2 col-6 mx-auto">
                                 <button type="submit" class="btn btn-outline-warning text-black">Update Expertise</button>

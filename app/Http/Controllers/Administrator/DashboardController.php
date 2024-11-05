@@ -133,12 +133,7 @@ class DashboardController extends Controller
         }
     }
 
-    public function frontSliderImage(){
-        return view('dashboard.settings.front-slider.index');
-    }
-    public function frontSliderImageUpdate(){
-        //
-    }
+    
     
     public function cybsamdevShuvo(){
         return view('dashboard.cybsamdev.index');

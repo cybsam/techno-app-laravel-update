@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class SettingCaroseSlider extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'imagename',
+        'added_by',
+        'is_active',
+    ];
 }

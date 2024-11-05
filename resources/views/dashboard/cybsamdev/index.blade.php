@@ -76,7 +76,7 @@
                 <div class="card-body">
                     <p class="card-title">Migrate</p>
                     <div class="d-grid gap-2">
-                        <a href="{{ url('/') }}/cybsamdev/migrate-force" class="btn btn-outline-danger disabled">Migrate</a>
+                        <a href="{{ url('/') }}/cybsamdev/migrate-force" class="btn btn-outline-danger">Migrate</a>
                     </div>
                 </div>
             </div>

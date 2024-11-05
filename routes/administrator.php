@@ -130,6 +130,7 @@ Route::prefix('en/Administrator')->middleware(['auth:web','isAdmin','preventback
 
     Route::get('visit-site',[App\Http\Controllers\Administrator\DashboardController::class, 'VisitWebSite'])->name('supUser.visitWebSite');
     
+    
 
     //end settings
 

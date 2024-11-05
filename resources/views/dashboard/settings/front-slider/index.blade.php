@@ -22,18 +22,37 @@
             </div>
         </div>
         <div class="card-body">
+
+            <table class="table table-sm datatable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>image</th>
+                        <th>action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#</td>
+                        <td>n</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="folat-left">
+                <h5>Image preview</h5>
+            </div>
             <div class="mh-50 mw:50">
                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="{{ asset('public/image/carosel-slider') }}/engrieening.png" class="d-block w-100 mh-50" alt="...">
+                            <img src="{{ asset('image/carosel-slider') }}/engrieening.png" class="d-block w-100 mh-50" alt="...">
                         </div>
                         <div class="carousel-item">
-                            <img src="{{ asset('public/image/carosel-slider') }}/installsutation.png" class="d-block w-100 mh-50"
+                            <img src="{{ asset('image/carosel-slider') }}/installsutation.png" class="d-block w-100 mh-50"
                                 alt="...">
                         </div>
                         <div class="carousel-item">
-                            <img src="{{ asset('public/image/carosel-slider') }}/pocurement.jpg" class="d-block w-100 mh-50" alt="...">
+                            <img src="{{ asset('image/carosel-slider') }}/pocurement.jpg" class="d-block w-100 mh-50" alt="...">
                         </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"

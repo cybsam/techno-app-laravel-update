@@ -50,7 +50,7 @@ class CaroselSliderController extends Controller
 
             $dataIns = new SettingCaroseSlider();
             $dataIns->imagename = $imageName;
-            $dataIns->added_by = Auth::user()->name;
+            $dataIns->added_by = $request->input('typeofimage');
             $dataIns->is_active = '0';
             $saveData = $dataIns->save();
             if ($saveData) {

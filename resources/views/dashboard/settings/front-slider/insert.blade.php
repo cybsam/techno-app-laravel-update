@@ -42,7 +42,7 @@
                                 <br>
                             </div>
                             <div class="form-group">
-                                <label for="">Which type of images is?</label>
+                                <label for="">Name of this image is?</label>
                                 <input type="text" name="typeofimage" id="typeofimage" class="form-control">
                                 <br>
                             </div>

@@ -44,7 +44,7 @@
                         <th>#</th>
                         <th>Image</th>
                         <th>Image Preview</th>
-                        <th>Added by</th>
+                        <th>Name</th>
                         <th>Activate</th>
                         <th>action</th>
                     </tr>

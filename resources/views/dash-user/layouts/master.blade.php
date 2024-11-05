@@ -53,6 +53,18 @@
     @php
         $AboutUsInformation = DB::table('about_us_information')->where('id','1')->first();
     @endphp
+    
+    @php
+        $projectCategory = DB::table('project_categories')->get();
+    @endphp
+
+    @php
+        $productAndServiceDesign = DB::table('product_services')->where('is_active',1)->where('__prosermenuselect','design-and-consultancy-services')->get();
+        $productAndServiceElectrial = DB::table('product_services')->where('is_active',1)->where('__prosermenuselect','hvac-and-bbt')->get();
+        $productAndServiceFire = DB::table('product_services')->where('is_active',1)->where('__prosermenuselect','fire-solution')->get();
+        $productAndServiceAutomation = DB::table('product_services')->where('is_active',1)->where('__prosermenuselect','automation-solution')->get();
+        
+    @endphp
             
     <div class="offwrap"></div>
      

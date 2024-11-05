@@ -11,12 +11,16 @@
                             <ul>
                                 <li>
                                     <i class="flaticon-email"></i>
-                                    <a href="mailto:{{ $AboutUsInformation->company_email }}">{{ $AboutUsInformation->company_email }}</a>
+                                    <a
+                                        href="mailto:{{ $AboutUsInformation->company_email_1 }}">{{ $AboutUsInformation->company_email_1 }}</a>
                                 </li>
                                 <li>
                                     <i class="flaticon-call"></i>
-                                    <a href="tel:{{ $AboutUsInformation->company_mobile_1 }}"> {{ $AboutUsInformation->company_mobile_1 }}</a>
+                                    <a href="tel:{{ $AboutUsInformation->company_mobile_1 }}">
+                                        {{ $AboutUsInformation->company_mobile_1 }}</a>
+                                       
                                 </li>
+                                
                                 <li>
                                     <i class="flaticon-location"></i>
                                     {{ $AboutUsInformation->company_address_1 }}
@@ -27,9 +31,12 @@
                     <div class="col-lg-4 text-right">
                         <div class="toolbar-sl-share">
                             <ul>
-                                <li class="opening"> <em><i class="flaticon-clock"></i>Saturday - Thursday / {{ $AboutUsInformation->company_office_time }}</em> </li>
-                                <li><a href="{{ route('login') }}">Login</a></li>
-                                
+                                <li class="opening"> <em><i class="flaticon-clock"></i>Saturday - Thursday /
+                                        {{ $AboutUsInformation->company_office_time }}</em> </li>
+                               <li>
+                                    <a href="{{ route('frontEnd.ContactS') }}">Contact Us</a>
+                              </li>
+
                             </ul>
                         </div>
                     </div>
@@ -45,8 +52,8 @@
                 <div class="row-table">
                     <div class="col-cell header-logo">
                         <div class="logo-area">
-                            <a href="{{ url('/') }}">
-                                <img src="{{ asset('image/FrontEnd/logoFav/logo.png') }}" alt="techno logo">
+                            <a href="{{ route('frontEndIndex') }}">
+                                <img src="{{ asset('image/FrontEnd/logoFav/logo.PNG') }}" alt="Techno Apogee">
                             </a>
                         </div>
                     </div>
@@ -56,7 +63,7 @@
                                 <nav class="rs-menu hidden-md">
                                     <ul class="nav-menu">
                                         <li class="current-menu-item">
-                                            <a href="{{ url('/') }}">Home</a>
+                                            <a href="{{ route('frontEndIndex') }}"><i class="fa fa-home" aria-hidden="true"></i></a>
                                         </li>
                                         <li class="menu-item-has-children">
                                             <a href="{{ route('frontEndIndex.about-us') }}">About Us</a>
@@ -82,57 +89,48 @@
                                                 <li>
                                                     <div class="sub-menu-mega">
                                                         <div class="meu-item " style="padding-left: 56px;">
-                                                            <a href="">DESIGN
-                                                                & CONSULTANCY SERVICES</a>
+                                                            <a href="{{ route('FrontEndProduct.DesignAndConsultancy') }}">DESIGN & CONSULTANCY SERVICE</a>
+                                                            
                                                             <ul>
-                                                                {{-- @foreach ($menu as $item)
-                                                                    @if ($item->parentid == 2)
-                                                                        
-                                                                        <li><a
-                                                                                href="{{ url($item->slug) }}">{{ $item->name }}</a>
-                                                                        </li>
-                                                                    @endif
-                                                                @endforeach --}}
-
+                                                                @foreach ($productAndServiceDesign as $ProductDesign)
+                                                                    <li><a href="{{ route('frontEndIndex.ProductAndService',['slug'=>$ProductDesign->__proserslug]) }}">{{ $ProductDesign->__prosername }}</a></li>
+                                                                @endforeach
                                                             </ul>
                                                         </div>
                                                         <div class="meu-item ">
-                                                            <a href="">ELECTRICAL
-                                                                SOLUTION</a>
+                                                            <a href="{{ route('FrontEndProduct.hvacAndBBTsolution') }}">Solar Power & Cleanroom</a>
                                                             <ul>
-                                                                {{-- @foreach ($menu as $item)
-                                                                    @if ($item->parentid == 3)
+                                                                @foreach ($productAndServiceElectrial as $ElectricalSol)
+                                                                    
                                                                         <li><a
-                                                                                href="{{ url($item->slug) }}">{{ $item->name }}</a>
+                                                                                href="{{ route('frontEndIndex.ProductAndService',['slug'=>$ElectricalSol->__proserslug]) }}">{{ $ElectricalSol->__prosername }}</a>
                                                                         </li>
-                                                                    @endif
-                                                                @endforeach --}}
+                                                                    
+                                                                @endforeach
                                                             </ul>
                                                         </div>
                                                         <div class="meu-item">
-                                                            <a href="">FIRE
-                                                                SOLUTION</a>
+                                                            <a href="{{ route('FrontEndProduct.fireSolutions') }}">FIRE SAFETY SOLUTIONS</a>
                                                             <ul>
-                                                                {{-- @foreach ($menu as $item)
-                                                                    @if ($item->parentid == 4)
+                                                                @foreach ($productAndServiceFire as $FireSolutions)
+                                                                    
                                                                         <li><a
-                                                                                href="{{ url($item->slug) }}">{{ $item->name }}</a>
+                                                                                href="{{ route('frontEndIndex.ProductAndService',['slug'=>$FireSolutions->__proserslug]) }}">{{ $FireSolutions->__prosername }}</a>
                                                                         </li>
-                                                                    @endif
-                                                                @endforeach --}}
+                                                                    
+                                                                @endforeach
                                                             </ul>
                                                         </div>
                                                         <div class="meu-item">
-                                                            <a href="">AUTOMATION
-                                                                SOLUTION</a>
+                                                            <a href="{{ route('FrontEndProduct.BmsAutomation') }}">AUTOMATION</a>
                                                             <ul>
-                                                                {{-- @foreach ($menu as $item)
-                                                                    @if ($item->parentid == 5)
+                                                                @foreach ($productAndServiceAutomation as $ProductAndAutomationSolution)
+                                                                    
                                                                         <li><a
-                                                                                href="{{ url($item->slug) }}">{{ $item->name }}</a>
+                                                                                href="{{ route('frontEndIndex.ProductAndService',['slug'=>$ProductAndAutomationSolution->__proserslug]) }}">{{ $ProductAndAutomationSolution->__prosername }}</a>
                                                                         </li>
-                                                                    @endif
-                                                                @endforeach --}}
+                                                                    
+                                                                @endforeach
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -143,41 +141,36 @@
                                         <li class="menu-item-has-children">
                                             <a href="">Our project</a>
                                             <ul class="sub-menu">
-                                                <li><a href="">Ongoing
+                                                <li><a href="{{ route('FrontEnd.OnGoingProject') }}">Ongoing
                                                         Project</a></li>
                                                 <li class="menu-item-has-children-sub">
-                                                    <a href="#">Complete
-                                                        Project</a>
+                                                    <a href="#">Complete Project</a>
                                                     <ul>
-                                                        <li><a href="">Industry
-                                                                Projects</a></li>
-                                                        <li><a href="">Bank
-                                                                & Financial Projects</a></li>
-                                                        <li><a href="">NGO</a></li>
-                                                        <li><a href="">Club</a></li>
-                                                        <li><a href="">Hotel &
-                                                                Resorts</a></li>
-                                                        <li><a href="">Govt.
-                                                                Projects</a></li>
-                                                        <li><a href="">Commercial
-                                                                Building Projects</a></li>
+                                                        @foreach ($projectCategory as $key => $projectCategory)
+                                                            <li><a
+                                                                    href="{{ route('FrontEnd.CompleteProjectShow', ['project_cate_slug' => $projectCategory->project_category_slug]) }}">{{ $projectCategory->project_category }}</a>
+                                                            </li>
+                                                        @endforeach
+
                                                     </ul>
                                                 </li>
                                             </ul>
                                         </li>
-                                        <li>
-                                            <a href="">Blog</a>
-                                        </li>
-                                        <li class="bg-warning">
-                                            <a class="" href="{{ route('logout') }}"
-                                                onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
-                                                {{ __('Logout') }}
-                                            </a>
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                                class="d-none">
-                                                @csrf
-                                            </form>
+                                        
+                                        <li class="menu-item-has-children">
+                                          <a href="">Files</a>
+                                              @php
+                                                  $enlishtmentDoc = 'enlistment-document';
+                                                  $datasheet = 'product-datasheet';
+                                              @endphp
+                                            <ul class="sub-menu">
+                                                <li><a href="{{ route('FrontEndDownload.CompanyProfileshow') }}">Company Profile</a></li>
+                                                <li><a href="{{ route('FrontEndDownload.EnlishtmentsDocuments',['enlist_slug'=>$enlishtmentDoc]) }}">Enlistment Documents</a></li>
+                                                <li><a href="{{ route('FrontEndDownload.ProductDataSheet',['prod_slug'=>$datasheet]) }}">Product DataSheet</a></li>
+                                            </ul>
+                                      </li>
+                                      <li>
+                                            <a href="{{ route('FrontEndBlog.Index') }}">Blogs</a>
                                         </li>
                                     </ul> <!-- //.nav-menu -->
                                 </nav>
@@ -191,7 +184,7 @@
                                 <li class="humburger">
                                     <a id="nav-expander" class="nav-expander bar" href="#">
                                         <div class="bar">
-                                          <img src="" alt="">
+                                            <img src="" alt="">
                                             <span class="dot1"></span>
                                             <span class="dot2"></span>
                                             <span class="dot3"></span>
@@ -203,7 +196,7 @@
                                             <span class="dot9"></span>
                                         </div>
                                     </a>
-                                </li> 
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -226,50 +219,57 @@
             </div>
             <ul class="nav-menu">
                 <li class="menu-item-has-children current-menu-item">
-                    <a href="index.html">Home</a>
+                    <a href="{{ route('frontEndIndex') }}">Home</a>
 
                 </li>
-                {{-- <li class="menu-item-has-children">
-                  <a href="#">Pages</a>                                                        
-                 
-              </li> --}}
+                
                 <li class="menu-item-has-children">
                     <a href="#">About Us</a>
                     <ul class="sub-menu">
-                        <li><a href="portfolio.html">Our Mission & Vision</a></li>
-                        <li><a href="portfolio2.html">Our Team</a></li>
-                        <li><a href="portfolio3.html">Our Expertise</a></li>
-                        <li><a href="portfolio3.html">Strategic Partners</a></li>
-
+                          <li><a href="{{ route('frontEndIndex.MissionAndVission') }}">Our Mission & Vision</a></li>
+                          <li><a href="{{ route('frontEndIndex.ourTeam') }}">Our Team</a></li>
+                          <li><a href="{{ route('frontEndIndex.OurConcern') }}">Our Concern</a></li>
+                          <li><a href="{{ route('frontEndIndex.our-expertise') }}">Our Expertise</a></li>
+                          <li><a href="{{ route('frontEndIndex.strategic-partners') }}">Strategic Partners</a></li>
                     </ul>
                 </li>
                 <li class="menu-item-has-children">
                     <a href="#">PRODUCT & SERVICES</a>
                     <ul class="sub-menu">
-                        <li><a href="services-style1.html">DESIGN & CONSULTANCY SERVICES</a></li>
-                        <li><a href="services-style2.html">ELECTRICAL SOLUTION</a></li>
-                        <li><a href="business-planning.html">FIRE SOLUTION</a></li>
-                        <li><a href="business-planning.html">AUTOMATION SOLUTION</a></li>
+                        <li><a href="{{ route('FrontEndProduct.DesignAndConsultancy') }}">DESIGN & CONSULTANCY</a></li>
+                        <li><a href="{{ route('FrontEndProduct.hvacAndBBTsolution') }}">SOLAR & CLEAN-ROOM</a></li>
+                        <li><a href="{{ route('FrontEndProduct.fireSolutions') }}">FIRE SAFETY SOLUTION</a></li>
+                        <li><a href="{{ route('FrontEndProduct.BmsAutomation') }}">AUTOMATION</a></li>
 
                     </ul>
                 </li>
-                <li>
-                    <a href="blog.html">Our project</a>
+                <li class="menu-item-has-children">
+                    <a href="#">Projects</a>
+                    <ul class="sub-menu">
+                        <li><a href="{{ route('FrontEnd.OnGoingProject') }}">On Going Projects</a></li>
+                        <li class="menu-item-has-children-sub">
+                                                    <a href="#">Complete Projects</a>
+                                                    @php
+                                                    $projectCate = DB::table('project_categories')->get();
+                                                    @endphp
+                                                    <ul>
+                                                        @foreach ($projectCate as $key => $projectCategory)
+                                                            <li><a
+                                                                    href="{{ route('FrontEnd.CompleteProjectShow', ['project_cate_slug' => $projectCategory->project_category_slug]) }}">{{ $projectCategory->project_category }}</a>
+                                                            </li>
+                                                        @endforeach
+
+                                                    </ul>
+                                                </li>
+                        
+                    </ul>
                 </li>
                 <li>
-                    <a href="blog.html">Blog</a>
+                  <a href="{{ route('FrontEndBlog.Index') }}">Blog</a>
                 </li>
 
                 <li class="menu-item-has-children">
-                    <a class="" href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
-                        </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                            class="d-none">
-                            @csrf
-                        </form>
+                    <a href="{{ route('frontEnd.ContactS') }}">Contact</a>
 
                 </li>
             </ul> <!-- //.nav-menu -->
@@ -290,7 +290,7 @@
                         </div>
                         <div class="info-content">
                             <h4 class="title">Email</h4>
-                            <em><a href="mailto:{{ $AboutUsInformation->company_email }}">{{ {{ $AboutUsInformation->company_email }} }}</a></em>
+                            <em><a href="mailto:{{ $AboutUsInformation->company_email_1 }}">{{ $AboutUsInformation->company_email_1 }}</a></em>
                         </div>
                     </div>
                     <div class="address-list">
@@ -305,8 +305,7 @@
                 </div>
             </div>
         </nav>
-        <!-- Canvas Menu end -->
+        
     </header>
-    <!--Header End-->
+    
 </div>
-<!--Full width header End-->

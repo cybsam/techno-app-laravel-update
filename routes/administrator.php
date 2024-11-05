@@ -29,9 +29,12 @@ Route::prefix('en/Administrator')->middleware(['auth:web','isAdmin','preventback
     // update user
     Route::get('User/Update/{user_id}/{user_name}',[App\Http\Controllers\Administrator\UsersController::class, 'updateUser'])->name('Administrator.UpdateUser');
     Route::post('User/Update/Sub/Post',[App\Http\Controllers\Administrator\UsersController::class, 'updateUserSub'])->name('Administrator.UpdateUserDonePo');
-    // not working
+    Route::get('User/delete/{user_id}/soft/',[App\Http\Controllers\Administrator\UsersController::class, 'UsersSoftDel'])->name('Administrator.UsersSoftDelete');
+    Route::get('User/restore/{user_id}/soft/',[App\Http\Controllers\Administrator\UsersController::class, 'usersRestore'])->name('Administrator.UsersRestoreUser');
+    
+    Route::get('User/Archive/list',[App\Http\Controllers\Administrator\UsersController::class, 'archiveList'])->name('Administrator.UserArchiveListSh');
     Route::post('User/Update/Status',[App\Http\Controllers\Administrator\UsersController::class, 'is_active'])->name('SupUser.UserIsActive');
-    Route::post('User/Delete',[App\Http\Controllers\Administrator\UsersController::class, 'softDeleteUser'])->name('SupUser.UserSoftDel');
+    Route::get('User/{user_id}/Delete',[App\Http\Controllers\Administrator\UsersController::class, 'usersDelete'])->name('Administrator.UserDelete');
 
     //end user
     
@@ -58,8 +61,9 @@ Route::prefix('en/Administrator')->middleware(['auth:web','isAdmin','preventback
 
     Route::get('About-us/our-expertise',[App\Http\Controllers\Administrator\AboutUs\ExpertiseController::class, 'expertiseIndex'])->name('SupUser.OurExpertiseIndex');
     Route::post('About-us/our-expertise/store',[App\Http\Controllers\Administrator\AboutUs\ExpertiseController::class, 'expertiseStore'])->name('SupUser.OurExpertiseStore');
-    Route::post('About-us/our-expertise/update',[App\Http\Controllers\Administrator\AboutUs\ExpertiseController::class, 'expertiseUpdate'])->name('SupUser.OurExpertiseUpdate');
-    Route::post('About-us/our-expertise/delete',[App\Http\Controllers\Administrator\AboutUs\ExpertiseController::class, 'expertiseDelete'])->name('SupUser.OurExpertiseDelete');
+    Route::get('About-us/our-expertise/{exper_id}/update',[App\Http\Controllers\Administrator\AboutUs\ExpertiseController::class, 'expertiseUpdate'])->name('SupUser.OurExpertiseUpdate');
+    Route::post('About-us/our-expertise/post/update',[App\Http\Controllers\Administrator\AboutUs\ExpertiseController::class, 'expertiseUpdatePost'])->name('SupUser.OurExpertiseUpdatePost');
+    Route::get('About-us/our-expertise/{exper_id}/delete',[App\Http\Controllers\Administrator\AboutUs\ExpertiseController::class, 'expertiseDelete'])->name('SupUser.OurExpertiseDelete');
 
     Route::get('About-us/Strategic-Partners/Index',[App\Http\Controllers\Administrator\AboutUs\StrategicPartnersController::class, 'IndexPartners'])->name('SupUser.OurStrategicPartners');
     Route::get('About-us/Strategic-Partners/Insert',[App\Http\Controllers\Administrator\AboutUs\StrategicPartnersController::class, 'InsertPartners'])->name('SupUser.OurStrategicPartnersInsert');
@@ -154,6 +158,7 @@ Route::prefix('en/Administrator')->middleware(['auth:web','isAdmin','preventback
     //contact
     Route::get('contact/front',[App\Http\Controllers\Administrator\DashboardController::class, 'ContactFrontEnd'])->name('supUser.FrontEndContact');
     Route::get('contact/front/{id}/show',[App\Http\Controllers\Administrator\DashboardController::class, 'ContactFrontEndShow'])->name('supUser.FrontEndContactShow');
+    Route::get('contact/front/{id}/delete',[App\Http\Controllers\Administrator\DashboardController::class, 'contactFrontDelete'])->name('supUser.FrontEndContactDelete');
     
     // cybsam dev
     Route::get('cybsam-shuvo-mr-robot-dev',[DashboardController::class, 'cybsamdevShuvo'])->name('dashboard.shuvodev');

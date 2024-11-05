@@ -23,8 +23,8 @@ class UsersController extends Controller
 {
     public function index(){
         $listAllUsers = User::all()->reverse();
-        $users = User::where('role_int',0)->where('role','user')->get()->reverse();
-        $Admin = User::where('role_int',1)->where('role','admin')->get()->reverse();
+        $users = User::where('role_int',0)->where('role','user')->where('is_active','1')->get()->reverse();
+        $Admin = User::where('role_int',1)->where('role','admin')->where('is_active','1')->get()->reverse();
 
         return view('dashboard.users.index',[
             'users'=>$users,
@@ -221,6 +221,60 @@ class UsersController extends Controller
             }else{
                 return redirect()->back()->with('adminuserupdateerr','Something went wrong!');
             }
+        }
+    }
+    
+    public function UsersSoftDel(Request $request, $user_id){
+        $userId = $user_id;
+        $value = 0;
+        $softDelete = User::where('id',$userId)->update([
+            'is_active'=>$value
+        ]);
+        if ($softDelete) {
+            return redirect()->back()->with('regSuccAdmin','Users Archive done, check archive folder!');
+        }else {
+            return redirect()->back()->with('regErroradmin','Something went wrong!');
+        }
+    }
+
+    public function archiveList(){
+        $value = 0;
+        $archiveData = User::where('is_active',$value)->get()->reverse();
+
+        if ($archiveData) {
+            return view('dashboard.users.archive',[
+                'archiveData'=>$archiveData
+            ]);
+        }else{
+            abort(403);
+        }
+    }
+
+    public function usersRestore(Request $request, $user_id){
+        $userId = $user_id;
+        $value = 1;
+        $userRestore = User::where('id',$userId)->update([
+            'is_active'=>$value
+        ]);
+        if ($userRestore) {
+            return redirect()->back()->with('restoreUsers','Users restore done, check!');
+        }else {
+            return redirect()->back()->with('restoreProblem','Something went wrong!');
+        }
+    }
+
+    public function usersDelete(Request $request, $user_id){
+        $userId = $user_id;
+
+        $usersData = User::where('id',$userId)->first();
+        $imageLocation = base_path('public/image/users/'.$usersData->user_image);
+        unlink($imageLocation);
+
+        $deleteUser = User::where('id',$userId)->delete();
+        if ($deleteUser) {
+            return redirect()->back()->with('restoreUsers','User deleted...');
+        }else {
+            return redirect()->back()->with('restoreProblem','Something went wrong!');
         }
     }
 }

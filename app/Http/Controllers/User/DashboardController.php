@@ -12,4 +12,15 @@ class DashboardController extends Controller
         return view('dash-user.dashboard');
 
     }
+
+    public function activity(Request $request){
+        return "alert to this users";
+    }
+
+    public function updateUsers(){
+
+
+        return "update to this user";
+
+    }
 }

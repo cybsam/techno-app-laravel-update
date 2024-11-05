@@ -23,27 +23,16 @@
                     aria-label="Slide 3"></button>
             </div>
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="{{ asset('public/image/carosel-slider/engrieening.png') }}" class="d-block w-100" alt="Techno Apogee Engineering">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h1 style="color: #383838;">Engineering</h1>
-                        <p style="color: #383838;">Techno Apogee Engineering Team.</p>
+                @foreach ($getCaroselSlider as $caroselSlider)
+                    
+                    <div class="carousel-item {{ $loop->first ? 'active':' ' }}">
+                        <img src="{{ asset('image/carosel-slider/') }}/{{ $caroselSlider->imagename }}" class="d-block w-100" alt="{{ $caroselSlider->added_by }}">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h1 style="color: #383838;">{{ $caroselSlider->added_by }}</h1>
+                            <p style="color: #383838;">{{ $caroselSlider->added_by }}.</p>
+                        </div>
                     </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="{{ asset('public/image/carosel-slider/installsutation.png') }}" class="d-block w-100" alt="Techno Apogee Construction">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h1 style="color: #383838;">Construction</h1>
-                        <p style="color: #383838;">Techno Apogee Construction Team.</p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="{{ asset('public/image/carosel-slider/pocurement.png') }}" class="d-block w-100" alt="Techno Apogee Pocurement">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h1 style="color: #383838;">Pocurement</h1>
-                        <p style="color: #383838;">Techno Apogee Pocurement Team.</p>
-                    </div>
-                </div>
+                @endforeach
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#cybsamCarouselApogee"
                 data-bs-slide="prev">

@@ -243,4 +243,30 @@ class OurTeamController extends Controller
             return redirect()->back()->with('succ','Something went wrong, try again');
         }
     }
+
+    public function teamActive(Request $request, $team_id){
+        $value = '1';
+        $team_id = $team_id;
+        $updateTeamMember = AboutOurTeam::where('id',$team_id)->update([
+            'is_active'=>$value
+        ]);
+        if ($updateTeamMember) {
+            return redirect()->back()->with('succ','Activate Successfully!');
+        }else{
+            return redirect()->back()->with('validerr','Something went wrong, try again');
+        }
+    }
+    
+    public function teamDeactive(Request $request, $team_id){
+        $value = '0';
+        $team_id = $team_id;
+        $updateTeamMember = AboutOurTeam::where('id',$team_id)->update([
+            'is_active'=>$value
+        ]);
+        if ($updateTeamMember) {
+            return redirect()->back()->with('succ','DeActive Successfully!');
+        }else{
+            return redirect()->back()->with('validerr','Something went wrong, try again');
+        }
+    }
 }

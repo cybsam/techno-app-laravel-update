@@ -64,6 +64,7 @@
                 <th scope="col">Department</th>
                 <th scope="col">Mobile</th>
                 <th scope="col">Email</th>
+                <th scope="col">Status</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -79,6 +80,15 @@
                     <td>{{ Str::limit($listMember->department, 15) }}</td>
                     <td>{{ $listMember->mobile }}</td>
                     <td>{{ $listMember->email }}</td>
+                    <td>
+                        <button class="badge {{ $listMember->is_active == 1 ? 'bg-warning':'bg-info'; }}" type="submit">
+                            @if ($listMember->is_active == 1)
+                                <a href="{{ route('SupUser.OurTeamDeactive',['team_id' => $listMember->id]) }}" onclick="alert('Deactivated...');" class="text-white">deactive</a>
+                            @else
+                                <a href="{{ route('SupUser.OurTeamActive',['team_id' => $listMember->id]) }}" onclick="alert('Activate...');" class="text-white">active</a>
+                            @endif
+                        </button>
+                    </td>
                     <td>
                         <div class="btn-group" role="group">
 

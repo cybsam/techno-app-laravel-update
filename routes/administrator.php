@@ -53,7 +53,9 @@ Route::prefix('en/Administrator')->middleware(['auth:web','isAdmin','preventback
     Route::get('Our-team/Index/{team_id}/Update/',[App\Http\Controllers\Administrator\AboutUs\OurTeamController::class, 'teamUpdate'])->name('SupUser.OurTeamUpdate');
     Route::post('Our-team/Index/post/Update/',[App\Http\Controllers\Administrator\AboutUs\OurTeamController::class, 'teamUpdatePost'])->name('SupUser.OurTeamUpdatePost');
     Route::get('Our-team/Index/{team_id}/Delete',[App\Http\Controllers\Administrator\AboutUs\OurTeamController::class, 'teamDelete'])->name('SupUser.OurTeamDelete');
-
+    Route::get('Our-team/Index/{team_id}/active',[App\Http\Controllers\Administrator\AboutUs\OurTeamController::class, 'teamActive'])->name('SupUser.OurTeamActive');
+    Route::get('Our-team/Index/{team_id}/deactive',[App\Http\Controllers\Administrator\AboutUs\OurTeamController::class, 'teamDeactive'])->name('SupUser.OurTeamDeactive');
+    
     Route::get('About-Us/our-concern',[App\Http\Controllers\Administrator\AboutUs\OurConcernController::class, 'bckIndex'])->name('SupUser.OurConcernBck');
     Route::post('About-Us/our-concern/insert',[App\Http\Controllers\Administrator\AboutUs\OurConcernController::class, 'bckIndexInsert'])->name('SupUser.OurConcernBckInsert');
     Route::post('About-Us/our-concern/update',[App\Http\Controllers\Administrator\AboutUs\OurConcernController::class, 'bckIndexUpdate'])->name('SupUser.OurConcernBckUpdate');

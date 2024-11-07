@@ -52,7 +52,7 @@ class OurTeamController extends Controller
                 $randstr = Carbon::now()->format('Y-m-d-H-i-s-u');
                 $imageNameNew = $nameStr.'-'.$deginaStr.'-'.$randstr.'.'.$inpImage->getClientOriginalExtension();
                 $storeLocation = base_path('public/image/about-us/our-team/'.$imageNameNew);
-                Image::make($inpImage)->save($storeLocation);
+                Image::make($inpImage)->resize(310,310)->save($storeLocation);
 
                 $insertDataDB = new AboutOurTeam();
                 $insertDataDB->name = $input['name'];
@@ -196,7 +196,7 @@ class OurTeamController extends Controller
             unlink($oldImage);
 
             $storeLocation = base_path('public/image/about-us/our-team/'.$imageNameNew);
-            Image::make($inpImage)->save($storeLocation);
+            Image::make($inpImage)->resize(310,310)->save($storeLocation);
             $membersDataupdate = AboutOurTeam::where('id',$request->id)->update([
                 'name'=>$request->input('name'),
                 'department'=>$request->input('department'),

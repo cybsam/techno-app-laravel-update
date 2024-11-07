@@ -94,13 +94,13 @@ class AboutController extends Controller
     // Our team
     public function OurTeam(){
         // $AboutUsInformation = AboutUsInformation::where('id',1)->first();
-        $management = AboutOurTeam::where('department','management')->get();
-        $project_engineering_operation_department = AboutOurTeam::where('department','project-engineering-operation-department')->get();
-        $admin_operation = AboutOurTeam::where('department','admin-operation')->get();
-        $business_development = AboutOurTeam::where('department','business-development')->get();
-        $information_technology_design = AboutOurTeam::where('department','information-technology-design')->get();
-        $support_team_electrical_maintenance = AboutOurTeam::where('department','support-team-electrical-maintenance')->get();
-        $development = AboutOurTeam::where('department','development')->get();
+        $management = AboutOurTeam::where('department','management')->where('is_active','1')->get();
+        $project_engineering_operation_department = AboutOurTeam::where('department','project-engineering-operation-department')->where('is_active','1')->get();
+        $admin_operation = AboutOurTeam::where('department','admin-operation')->where('is_active','1')->get();
+        $business_development = AboutOurTeam::where('department','business-development')->where('is_active','1')->get();
+        $information_technology_design = AboutOurTeam::where('department','information-technology-design')->where('is_active','1')->get();
+        $support_team_electrical_maintenance = AboutOurTeam::where('department','support-team-electrical-maintenance')->where('is_active','1')->get();
+        $development = AboutOurTeam::where('department','development')->where('is_active','1')->get();
 
         SEOTools::setTitle('Techno Team');
         SEOTools::setDescription('We manage complex projects offering results that fit our client’s needs including general contracting, design, construction management, business development, feasibility studies and production planning among others. We are committed to continuous training and instruction to ensure a safe working environment for our employees and the clients we serve. We also provide a full range of virtual design and construction services, as well as the latest in smart mapping and computerized modeling with our In house expert and chartered highly qualified expert consultant.');

@@ -53,7 +53,9 @@ Route::prefix('en/Administrator')->middleware(['auth:web','isAdmin','preventback
     Route::get('Our-team/Index/{team_id}/Update/',[App\Http\Controllers\Administrator\AboutUs\OurTeamController::class, 'teamUpdate'])->name('SupUser.OurTeamUpdate');
     Route::post('Our-team/Index/post/Update/',[App\Http\Controllers\Administrator\AboutUs\OurTeamController::class, 'teamUpdatePost'])->name('SupUser.OurTeamUpdatePost');
     Route::get('Our-team/Index/{team_id}/Delete',[App\Http\Controllers\Administrator\AboutUs\OurTeamController::class, 'teamDelete'])->name('SupUser.OurTeamDelete');
-
+    Route::get('Our-team/Index/{team_id}/active',[App\Http\Controllers\Administrator\AboutUs\OurTeamController::class, 'teamActive'])->name('SupUser.OurTeamActive');
+    Route::get('Our-team/Index/{team_id}/deactive',[App\Http\Controllers\Administrator\AboutUs\OurTeamController::class, 'teamDeactive'])->name('SupUser.OurTeamDeactive');
+    
     Route::get('About-Us/our-concern',[App\Http\Controllers\Administrator\AboutUs\OurConcernController::class, 'bckIndex'])->name('SupUser.OurConcernBck');
     Route::post('About-Us/our-concern/insert',[App\Http\Controllers\Administrator\AboutUs\OurConcernController::class, 'bckIndexInsert'])->name('SupUser.OurConcernBckInsert');
     Route::post('About-Us/our-concern/update',[App\Http\Controllers\Administrator\AboutUs\OurConcernController::class, 'bckIndexUpdate'])->name('SupUser.OurConcernBckUpdate');
@@ -120,8 +122,15 @@ Route::prefix('en/Administrator')->middleware(['auth:web','isAdmin','preventback
     Route::post('Settings/AboutUsInformation/Update',[App\Http\Controllers\Administrator\Settings\AboutUsInformationController::class, 'updateInformation'])->name('SupUser.SetingsAboutUsInfoUpdate');
 
     // slider
-    Route::get('Settings/Front-slider',[App\Http\Controllers\Administrator\DashboardController::class, 'frontSliderImage'])->name('SupUser.FrontSliderImage');
-    Route::post('Settings/Front-slider/update',[App\Http\Controllers\Administrator\DashboardController::class, 'frontSliderImageUpdate'])->name('SupUser.FrontSliderImageUpdate');
+    Route::get('Settings/Front-slider',[App\Http\Controllers\Administrator\Settings\CaroselSliderController::class, 'frontSliderImage'])->name('SupUser.FrontSliderImage');
+    Route::post('Settings/Front-slider/update',[App\Http\Controllers\Administrator\Settings\CaroselSliderController::class, 'frontSliderImageUpdate'])->name('SupUser.FrontSliderImageUpdate');
+    Route::get('Settings/Front-slider/{carosel_id}/deactive',[App\Http\Controllers\Administrator\Settings\CaroselSliderController::class, 'frontSliderImageDeactive'])->name('SupUser.FrontSliderDeactive');
+    Route::get('Settings/Front-slider/{carosel_id}/active',[App\Http\Controllers\Administrator\Settings\CaroselSliderController::class, 'frontSliderImageActive'])->name('SupUser.FrontSliderActive');
+    Route::get('Settings/Front-slider/insert/',[App\Http\Controllers\Administrator\Settings\CaroselSliderController::class, 'frontSliderInsert'])->name('SupUser.FrontSliderInsert');
+    Route::post('Settings/Front-slider/insert/save',[App\Http\Controllers\Administrator\Settings\CaroselSliderController::class, 'frontSliderInsertSave'])->name('SupUser.FrontSliderInsertSave');
+    Route::get('Settings/Front-slider/{carosel_id}/delete',[App\Http\Controllers\Administrator\Settings\CaroselSliderController::class, 'frontSliderDelete'])->name('SupUser.FrontSliderDelete');
+    
+    // end slider
 
     Route::get('Settings/Management/team',[App\Http\Controllers\Administrator\AboutUs\OurTeamController::class, 'TeamManagement'])->name('SupUser.TeamManagementInsert');
     Route::post('Settings/Management/team/ins',[App\Http\Controllers\Administrator\AboutUs\OurTeamController::class, 'TeamManagementIns'])->name('SupUser.TeamManagementInsertTr');
@@ -130,6 +139,7 @@ Route::prefix('en/Administrator')->middleware(['auth:web','isAdmin','preventback
 
     Route::get('visit-site',[App\Http\Controllers\Administrator\DashboardController::class, 'VisitWebSite'])->name('supUser.visitWebSite');
     
+
 
     //end settings
 

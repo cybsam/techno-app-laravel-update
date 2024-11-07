@@ -210,11 +210,11 @@
                     <i class="bi bi-gear"></i><span>Settings</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="settings-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
+                    {{-- <li>
                         <a href="">
                             <i class="bi bi-circle"></i><span>Main Settings</span>
                         </a>
-                    </li>
+                    </li> --}}
                     <li>
                         <a href="{{ route('SupUser.FrontSliderImage') }}" class="@if(URL::current() == route('SupUser.FrontSliderImage')) active @endif">
                             <i class="bi bi-circle"></i><span>Front Slider</span>
@@ -245,12 +245,7 @@
                 </ul>
             </li>
             <li class="nav-heading">Pages</li>
-            {{-- <li class="nav-item">
-                <a class="nav-link collapsed" href="pages-faq.html">
-                    <i class="bi bi-question-circle"></i>
-                    <span>F.A.Q</span>
-                </a>
-            </li> --}}
+            
             @php
                 $countUnSeenMsg = DB::table('front_contacts')->where('is_seen',0)->count();
             @endphp

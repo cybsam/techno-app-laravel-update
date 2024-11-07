@@ -113,7 +113,10 @@ class RegisterController extends Controller
                 $user->source = 'register';
                 $saveInfo = $user->save();
                 $lastId = $user->id;
-
+                
+                $uploadLocation = base_path('public/image/users/'.$new_image_name);
+                Image::make($users_image)->save($uploadLocation);
+                
                 $token = $lastId.hash('sha256',\Str::random(120));
                 $verifyUrl = route('user.verify',['token'=>$token, 'service'=>'Email verification','from'=>'techno','sender'=>'cybsam','lang'=>'english']);
 
@@ -124,7 +127,7 @@ class RegisterController extends Controller
                 ]);
 
 
-                $formEmail = 'no-replay-tech@technoapogee.com';
+                $formEmail = 'noreplay@technoapogee.com';
                 $formName = 'Techno Apogee Limited Authentication';
                 $message = "Dear <b>".$request->name.'</b>.<hr>';
                 $message.= 'Thanks for signin up, we just need you to verify your email address to complete setting up your account.';
@@ -144,8 +147,7 @@ class RegisterController extends Controller
                 });
                 
 
-                $uploadLocation = base_path('public/image/users/'.$new_image_name);
-                Image::make($users_image)->save($uploadLocation);
+                
 
                 if($saveInfo){
                     return redirect()->back()->with('regSucc','You need to verify your account, we have sent you an activition link, please check your email.');
@@ -170,6 +172,10 @@ class RegisterController extends Controller
                 $user->source = 'register';
                 $saveInfo = $user->save();
                 $lastId = $user->id;
+                
+                $uploadLocation = base_path('public/image/users/'.$newImageFromDefault);
+                // File::copy($defaultImageLocation)
+                Image::make($defaultImageLocation)->save($uploadLocation);
 
                 $token = $lastId.hash('sha256',\Str::random(120));
                 $verifyUrl = route('user.verify',['token'=>$token,'service'=>'Email Verification','from'=>'techno','sender'=>'cybsam','lang'=>'english']);
@@ -180,7 +186,7 @@ class RegisterController extends Controller
                     'token'=>$token
                 ]);
 
-                $formEmail = 'no-replay-tech@technoapogee.com';
+                $formEmail = 'noreplay@technoapogee.com';
                 $formName = 'Techno Apogee Limited Authentication';
                 $message = "Dear <b> ".$request->name."</b>.</br>";
                 $message.= 'Thanks for signin up, we just need you to verify your email address to complete setting up your account.';
@@ -199,9 +205,7 @@ class RegisterController extends Controller
                             ->subject($mail_data['subject']);
                 });
 
-                $uploadLocation = base_path('public/image/users/'.$newImageFromDefault);
-                // File::copy($defaultImageLocation)
-                Image::make($defaultImageLocation)->save($uploadLocation);
+                
 
                 if($saveInfo){
                     return redirect()->back()->with('regSucc','You need to verify your account, we have sent you an activition link, please check your email.');

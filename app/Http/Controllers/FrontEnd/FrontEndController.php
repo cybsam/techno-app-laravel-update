@@ -9,6 +9,7 @@ use App\Models\AboutUsInformation;
 use App\Models\AboutOurTeam;
 use App\Models\FrontContact;
 use App\Models\Project;
+use App\Models\SettingCaroseSlider;
 
 use Illuminate\Support\Facades\URL;
 // seo tools
@@ -28,6 +29,7 @@ class FrontEndController extends Controller
         $currentURL = URL::current();
         
         $AboutUsInformation = AboutUsInformation::where('id',1)->first();
+
         
         SEOMeta::setTitle('Techno Apogee');
         SEOMeta::setDescription($contentDescription);
@@ -52,10 +54,13 @@ class FrontEndController extends Controller
         JsonLd::setType('Techno Apogee');
         JsonLd::addImage('https://technoapogee.com/public/image/FrontEnd/logoFav/logo.PNG');
         
+        
+        $getCaroselSlider = SettingCaroseSlider::where('is_active','1')->get();
         $frontProjectShow = Project::where('is_ongoing',0)->inRandomOrder()->get();
         return view('FrontEndView.index',[
             // 'AboutUsInformation'=>$AboutUsInformation,
             'frontProjectShow'=>$frontProjectShow,
+            'getCaroselSlider'=>$getCaroselSlider,
         ]);
     }
 

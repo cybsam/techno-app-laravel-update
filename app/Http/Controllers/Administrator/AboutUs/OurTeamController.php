@@ -52,7 +52,7 @@ class OurTeamController extends Controller
                 $randstr = Carbon::now()->format('Y-m-d-H-i-s-u');
                 $imageNameNew = $nameStr.'-'.$deginaStr.'-'.$randstr.'.'.$inpImage->getClientOriginalExtension();
                 $storeLocation = base_path('public/image/about-us/our-team/'.$imageNameNew);
-                Image::make($inpImage)->save($storeLocation);
+                Image::make($inpImage)->resize(310,310)->save($storeLocation);
 
                 $insertDataDB = new AboutOurTeam();
                 $insertDataDB->name = $input['name'];
@@ -196,7 +196,7 @@ class OurTeamController extends Controller
             unlink($oldImage);
 
             $storeLocation = base_path('public/image/about-us/our-team/'.$imageNameNew);
-            Image::make($inpImage)->save($storeLocation);
+            Image::make($inpImage)->resize(310,310)->save($storeLocation);
             $membersDataupdate = AboutOurTeam::where('id',$request->id)->update([
                 'name'=>$request->input('name'),
                 'department'=>$request->input('department'),
@@ -241,6 +241,32 @@ class OurTeamController extends Controller
             return redirect()->back()->with('validerr','Delete Complete');
         }else{
             return redirect()->back()->with('succ','Something went wrong, try again');
+        }
+    }
+
+    public function teamActive(Request $request, $team_id){
+        $value = '1';
+        $team_id = $team_id;
+        $updateTeamMember = AboutOurTeam::where('id',$team_id)->update([
+            'is_active'=>$value
+        ]);
+        if ($updateTeamMember) {
+            return redirect()->back()->with('succ','Activate Successfully!');
+        }else{
+            return redirect()->back()->with('validerr','Something went wrong, try again');
+        }
+    }
+    
+    public function teamDeactive(Request $request, $team_id){
+        $value = '0';
+        $team_id = $team_id;
+        $updateTeamMember = AboutOurTeam::where('id',$team_id)->update([
+            'is_active'=>$value
+        ]);
+        if ($updateTeamMember) {
+            return redirect()->back()->with('succ','DeActive Successfully!');
+        }else{
+            return redirect()->back()->with('validerr','Something went wrong, try again');
         }
     }
 }

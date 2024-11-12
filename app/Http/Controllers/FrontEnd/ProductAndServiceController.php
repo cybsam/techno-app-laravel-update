@@ -25,7 +25,9 @@ class ProductAndServiceController extends Controller
         if ($fetchPro) {
 
             // for seo tools
-            $explodeKeyword = explode(',',$fetchPro->__proserkeyword);
+            $delimiters = "/[,.]/";
+            //delimiter
+            $explodeKeyword = preg_split($delimiters,$fetchPro->__proserkeyword);
             SEOMeta::setTitle($fetchPro->__prosertitle);
             SEOMeta::setDescription($fetchPro->__proserkeyword);
             SEOMeta::addMeta('article:published_time', $fetchPro->created_at->toW3CString(), 'property');
@@ -81,7 +83,8 @@ class ProductAndServiceController extends Controller
         if($fetchFromDb){
 
             // for seo tools
-            $explodeKeyword = explode(',',$fetchFromDb->__proserkeyword);
+            $delimiters = "/[,.]/";
+            $explodeKeyword = preg_split($delimiters,$fetchFromDb->__proserkeyword);
             SEOMeta::setTitle($fetchFromDb->__prosertitle);
             SEOMeta::setDescription($fetchFromDb->__proserkeyword);
             SEOMeta::addMeta('article:published_time', $fetchFromDb->created_at->toW3CString(), 'property');
@@ -91,7 +94,7 @@ class ProductAndServiceController extends Controller
             OpenGraph::setDescription($fetchFromDb->__proserkeyword);
             OpenGraph::setTitle($fetchFromDb->__prosertitle);
             OpenGraph::setUrl(URL::current());
-            OpenGraph::addProperty('type', 'Product And Service');
+            OpenGraph::addProperty('type', 'Product And Services');
             OpenGraph::addProperty('locale', 'BD');
             OpenGraph::addProperty('locale:alternate', ['BD', 'en-us']);
 

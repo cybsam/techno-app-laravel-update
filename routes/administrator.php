@@ -14,10 +14,10 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+// 'preventbackhistory',
 // Route::get('visit-site',[App\Http\Controllers\Administrator\DashboardController::class, 'VisitWebSite'])->name('supUser.visitWebSite');
 
-Route::prefix('en/Administrator')->middleware(['auth:web','isAdmin','preventbackhistory','isVerifyEmail'])->group(function(){
+Route::prefix('en/Administrator')->middleware(['auth:web','isAdmin','isVerifyEmail'])->group(function(){
     Route::get('Dashboard', [App\Http\Controllers\Administrator\DashboardController::class, 'index'])->name('Administrator.index');
     Route::get('Dashboard/profile',[App\Http\Controllers\Administrator\DashboardController::class,'UserProfile'])->name('SupUser.Profile');
     Route::post('Dashboard/profile/update/',[App\Http\Controllers\Administrator\DashboardController::class,'UserProfileUpdateNameImage'])->name('SupUser.ProfileUpdateNameImage');

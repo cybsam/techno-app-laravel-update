@@ -15,8 +15,8 @@ use App\Http\Controllers\FrontEnd\FrontEndController;
 */
 
 
-
-Route::prefix('cybsamdev')->middleware(['auth:web','isAdmin','preventbackhistory','isVerifyEmail'])->group(function(){
+// ,'preventbackhistory'
+Route::prefix('cybsamdev')->middleware(['auth:web','isAdmin','isVerifyEmail'])->group(function(){
     // Route::get('Optimize', [App\Http\Controllers\CybSamDev\CybDevController::class, 'optimize'])->name('cybsamdev.optimize');
     Route::get('optimize', function(){
         Artisan::call('optimize');

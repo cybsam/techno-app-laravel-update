@@ -24,9 +24,9 @@ Route::middleware(['guest:web'])->group(function(){
 });
 
 
-Route::middleware(['middleware'=>'preventbackhistory'])->group(function(){
-    Auth::routes();
-});
+// Route::middleware(['middleware'=>'preventbackhistory'])->group(function(){
+//     Auth::routes();
+// });
 
 
 

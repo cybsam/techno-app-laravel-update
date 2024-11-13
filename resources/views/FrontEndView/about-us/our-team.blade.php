@@ -1,5 +1,5 @@
 @extends('FrontEndView.layouts.frontMaster')
-@section('title', 'Our Team - About Us | Techno Apogee Limited')
+
 @section('content')
 
     

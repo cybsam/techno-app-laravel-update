@@ -1,7 +1,5 @@
 @extends('FrontEndView.layouts.frontMaster')
-@section('title', 'Project Portfolio | Techno Apogee')
-@section('metaTitle', 'Project Portfulio techno Apogee Engineering Limited, Fire panel & Maintenance BD, Techno Apogee Limited')
-@section('metaDescription', '')
+
 @section('content')
     <div class="rs-breadcrumbs">
         <div class="container">

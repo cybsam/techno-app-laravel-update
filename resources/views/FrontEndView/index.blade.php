@@ -1,5 +1,8 @@
 @extends('FrontEndView.layouts.frontMaster')
-@section('title', 'Techno Apogee')
+
+@push('title')
+    <title>Techno Apogee</title>
+@endpush
 @section('content')
 
 <style>

@@ -21,7 +21,7 @@ use Artesaos\SEOTools\Facades\SEOTools;
 class BlogController extends Controller
 {
     public function index(){
-        SEOTools::setTitle('Blogs');
+        SEOTools::setTitle('Blogs we write our experiance');
         SEOTools::setDescription('Techno Apogee started its operation in June 2006 in Dhaka, Bangladesh. We provide the best EPC support in Bangladesh&#039;s Fire Electrical &amp; Automation field. We confirm the most precise and cost-effective solution for Government and private sectors in Bangladesh.');
         SEOTools::opengraph()->setUrl(URL::current());
         SEOTools::setCanonical('https://technoapogee.com/en/blog');

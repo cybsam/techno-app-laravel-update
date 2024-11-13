@@ -1,8 +1,5 @@
 @extends('FrontEndView.layouts.frontMaster')
-@section('title', $projectDetaisView->project_name.' - Project Details | Techno Apogee')
-@section('metaTitle',$projectDetaisView->project_name)
 
-@section('metaDescription',$projectDetaisView->project_keyword)
 @section('content')
 <style>
 .portfolio-single img{

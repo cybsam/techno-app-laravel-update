@@ -1,7 +1,5 @@
 @extends('FrontEndView.layouts.frontMaster')
-@section('title', 'Blog Page | Techno Apogee')
-@section('metaTitle', ' ')
-@section('metaDescription', ' ')
+
 
 @section('content')
 

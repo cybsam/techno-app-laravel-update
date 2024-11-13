@@ -1,7 +1,5 @@
 @extends('FrontEndView.layouts.frontMaster')
-@section('title', $blogDetailesView->__blog_name.' | Techno Apogee')
-@section('metaTitle', $blogDetailesView->__blog_meta_title)
-@section('metaDescription', $blogDetailesView->__blog_meta_keyword)
+
 
 @section('content')
 

@@ -1,8 +1,14 @@
 @extends('FrontEndView.layouts.frontMaster')
-<!--@section('title', 'Terms & Conditions | Techno Apogee')-->
-<!--@section('metaTitle', ' ')-->
-<!--@section('metaDescription', ' ')-->
 
+@push('title')
+    <title>Terms & Conditions | Techno Apogee</title>
+@endpush
+@push('metaTitle')
+    <meta name="title" content="our terms and condition techno apogee ">
+@endpush
+@push('metaDescription')
+    <meta name="description" content="techno apogee terms and condition. techno apogee leading their business over 18 years in bangladesh">
+@endpush
 @section('content')
 
     <div class="rs-breadcrumbs">

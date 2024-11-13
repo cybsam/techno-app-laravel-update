@@ -1,7 +1,13 @@
 @extends('FrontEndView.layouts.frontMaster')
-<!--@section('title', 'Privacy Policy | Techno Apogee')-->
-<!--@section('metaTitle', ' ')-->
-<!--@section('metaDescription', ' ')-->
+@push('title')
+    <title>Privacy Policy | Techno Apogee</title>
+@endpush
+@push('metaTitle')
+    <meta name="title" content="Privacy policy techno apogee ">
+@endpush
+@push('metaDescription')
+    <meta name="description" content="techno apogee privacy policy. techno apogee leading their business over 18 years in bangladesh">
+@endpush
 
 @section('content')
 

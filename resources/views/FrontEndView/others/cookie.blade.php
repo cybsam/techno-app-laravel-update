@@ -1,7 +1,13 @@
 @extends('FrontEndView.layouts.frontMaster')
-<!--@section('title', 'Cookie Policy | Techno Apogee')-->
-<!--@section('metaTitle', ' ')-->
-<!--@section('metaDescription', ' ')-->
+@push('title')
+    <title>Cookie Policy | Techno Apogee</title>
+@endpush
+@push('metaTitle')
+    <meta name="title" content="Cookie Policy techno apogee ">
+@endpush
+@push('metaDescription')
+    <meta name="description" content="techno apogee Cookie Policy. techno apogee leading their business over 18 years in bangladesh">
+@endpush
 
 @section('content')
 

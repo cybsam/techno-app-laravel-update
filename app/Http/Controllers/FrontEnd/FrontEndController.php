@@ -10,6 +10,7 @@ use App\Models\AboutOurTeam;
 use App\Models\FrontContact;
 use App\Models\Project;
 use App\Models\SettingCaroseSlider;
+use Artisan;
 
 use Illuminate\Support\Facades\URL;
 // seo tools

@@ -1,4 +1,7 @@
 @extends('FrontEndView.layouts.frontMaster')
+@push('metaTitle')
+    <meta title="{{ $fetchPro->__prosertitle }}">
+@endpush
 
 @section('cssFront')
 

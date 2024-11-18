@@ -1,4 +1,8 @@
 @extends('FrontEndView.layouts.frontMaster')
+@push('metaTitle')
+    <meta title="Building Management system (BMS)">
+@endpush
+
 @section('cssFront')
 
 

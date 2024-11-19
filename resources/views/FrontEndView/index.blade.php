@@ -101,7 +101,7 @@
                 <div class="col-lg-6 pr-72">
                     <div class="left-side">
                         <img src="{{ asset('public/image/about-us/about.jpg')}}" alt="Techno Apogee started its operation from June 2006">
-                        <div class="skill-tag"><span>16</span> Years <br> Experience</div>
+                        <div class="skill-tag"><span id="yearsOfExperience"></span> Years <br> Experience</div>
                         {{-- <img class="left-pattern" src="{{ asset('public/image/fontend/img/pattern/pattern1.png')}}" alt=""> --}}
                     </div>
                 </div>

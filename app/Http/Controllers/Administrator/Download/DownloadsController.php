@@ -81,7 +81,13 @@ class DownloadsController extends Controller
                     // location
                     $fileLocation = base_path('/public/files/downloadsFile');
 
-                    $uploadCloudnary = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
+                    $uploadCloudnary = cloudinary()->upload($request->file('image')->getRealPath(),[
+                        'transformation' => [
+                            'width' => 236,
+                            'height' => 134,
+                        ]
+                    ])->getSecurePath();
+
                     $url = cloudinary()->getUrl($uploadCloudnary);
 
                     
@@ -134,7 +140,12 @@ class DownloadsController extends Controller
                     
 
                     if($othersCateName == 'blog'){
-                        $uploadCloudnary = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
+                        $uploadCloudnary = cloudinary()->upload($request->file('image')->getRealPath(),[
+                        'transformation' => [
+                            'width' => 236,
+                            'height' => 134,
+                            ]
+                        ])->getSecurePath();
                     
                         $request->file('uploadFileName')->move($fileLocation, $fileName);
 
@@ -155,8 +166,12 @@ class DownloadsController extends Controller
                             return redirect()->back()->with('fileUploadFailed','Something went wrong to upload this file');
                         }
                     }elseif ($othersCateName == 'product') {
-                        $uploadCloudnary = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
-                    
+                        $uploadCloudnary = cloudinary()->upload($request->file('image')->getRealPath(),[
+                            'transformation' => [
+                                'width' => 236,
+                                'height' => 134,
+                                ]
+                            ])->getSecurePath();
                         $request->file('uploadFileName')->move($fileLocation, $fileName);
 
                         $insDownload = new Download();
@@ -176,8 +191,12 @@ class DownloadsController extends Controller
                             return redirect()->back()->with('fileUploadFailed','Something went wrong to upload this file');
                         }
                     }elseif ($othersCateName == 'project') {
-                        $uploadCloudnary = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
-                    
+                        $uploadCloudnary = cloudinary()->upload($request->file('image')->getRealPath(),[
+                            'transformation' => [
+                                'width' => 236,
+                                'height' => 134,
+                                ]
+                            ])->getSecurePath();
                         $request->file('uploadFileName')->move($fileLocation, $fileName);
 
                         $insDownload = new Download();

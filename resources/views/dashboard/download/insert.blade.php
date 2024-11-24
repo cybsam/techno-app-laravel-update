@@ -45,7 +45,7 @@
                         @csrf
 
                         <div class="form-group">
-                            <span style="color: yellow;">is it <b>Blog, Project, Product</b> file? then click, <b>otherwise
+                            <span style="color: rgb(0, 0, 0);">is it <b>Blog, Project, Product</b> file? then click, <b>otherwise
                                     leave it blank!</b></span>
                             <select name="othersCategory" id="othersCategory" class="form-control">
                                 <option value="null" selected>Click to select</option>

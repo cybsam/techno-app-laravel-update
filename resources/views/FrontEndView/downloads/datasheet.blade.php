@@ -18,7 +18,7 @@
                 <div class="card">
                     <div class="card-body">
                         <p class="card-title">{{ $ProductDataSheet->remarks }}</p>
-                        <a href="https://technoapogee.com/public/files/downloadsFile/{{ $ProductDataSheet->file_name }}" class="btn btn-outline-success">Download</a>
+                        <a href="{{ $ProductDataSheet->file_path }}/{{ $ProductDataSheet->file_name }}" class="btn btn-outline-success">Download</a>
                     </div>
                 </div>
                 <div class="mt-3"></div>

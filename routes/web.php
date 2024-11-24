@@ -69,7 +69,7 @@ Route::prefix('en')->middleware(['guest:web'])->group(function(){
     
     Route::get('download',[App\Http\Controllers\FrontEnd\DownloadController::class, 'index'])->name('FrontEndDownload');
     Route::get('files/company-profile/show',[App\Http\Controllers\FrontEnd\DownloadController::class, 'CompanyProfileShow'])->name('FrontEndDownload.CompanyProfileshow');
-    Route::get('files/enlisht/{enlist_slug}',[App\Http\Controllers\FrontEnd\DownloadController::class, 'enlishtmentsDocuments'])->name('FrontEndDownload.EnlishtmentsDocuments');
+    Route::get('files/enlistments/{enlist_slug}',[App\Http\Controllers\FrontEnd\DownloadController::class, 'enlishtmentsDocuments'])->name('FrontEndDownload.EnlishtmentsDocuments');
     Route::get('files/product/{prod_slug}',[App\Http\Controllers\FrontEnd\DownloadController::class, 'ProductDataSheet'])->name('FrontEndDownload.ProductDataSheet');
     
     // contact 

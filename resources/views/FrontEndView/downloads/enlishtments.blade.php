@@ -18,7 +18,7 @@
                 <div class="card">
                     <div class="card-body">
                         <p class="card-title">{{ $enlishtment->remarks }}</p>
-                        <a href="https://technoapogee.com/public/files/downloadsFile/{{ $enlishtment->file_name }}" class="btn btn-outline-success">Download</a>
+                        <a href="{{ $enlishtment->file_path }}/{{ $enlishtment->file_name }}" class="btn btn-outline-success">Download</a>
                     </div>
                 </div>
                 <div class="mt-3"></div>

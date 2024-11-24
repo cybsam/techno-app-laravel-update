@@ -61,6 +61,7 @@ class DownloadsController extends Controller
                 if($request->input('othersCategory') == 'null' || $request->input('othersCategory') == ''){ 
                     
                     // file category
+
                     $fileCategory = $request->input('file_category');
                     $explodeCategory = explode('.',$fileCategory);
                     $categoryName = $explodeCategory[1];
@@ -86,6 +87,7 @@ class DownloadsController extends Controller
                         $insDownload->file_category = $categoryName;
                         $insDownload->file_category_slug = $categorySlug;
                         $insDownload->file_extension = $fileType;
+                        $insDownload->file_path = $fileLocation;
                         $insDownload->file_name = $fileName;
                         $insDownload->remarks = $request->fileRemarks;
                         $insDownload->description = $request->description;
@@ -132,6 +134,7 @@ class DownloadsController extends Controller
                         $insDownload->file_category = $categoryName;
                         $insDownload->file_category_slug = $categorySlug;
                         $insDownload->file_extension = $fileType;
+                        $insDownload->file_path = $fileLocation;
                         $insDownload->file_name = $fileName;
                         $insDownload->remarks = $request->fileRemarks;
                         $insDownload->description = $request->description;
@@ -150,6 +153,7 @@ class DownloadsController extends Controller
                         $insDownload->file_category = $categoryName;
                         $insDownload->file_category_slug = $categorySlug;
                         $insDownload->file_extension = $fileType;
+                        $insDownload->file_path = $fileLocation;
                         $insDownload->file_name = $fileName;
                         $insDownload->remarks = $request->fileRemarks;
                         $insDownload->description = $request->description;
@@ -167,6 +171,7 @@ class DownloadsController extends Controller
                         $insDownload->file_category = $categoryName;
                         $insDownload->file_category_slug = $categorySlug;
                         $insDownload->file_extension = $fileType;
+                        $insDownload->file_path = $fileLocation;
                         $insDownload->file_name = $fileName;
                         $insDownload->remarks = $request->fileRemarks;
                         $insDownload->description = $request->description;
@@ -194,7 +199,8 @@ class DownloadsController extends Controller
         $file_name = $file_name;
 
         $getDataDownload = Download::where('id',$file_id)->where('file_name',$file_name)->update([
-            'is_active'=>1
+            'is_active'=>1,
+            'is_active_str' => 'InActive'
         ]);
 
         if($getDataDownload){
@@ -209,8 +215,7 @@ class DownloadsController extends Controller
         $file_id = $archive_id;
         $file_name = $file_name;
         $deltfromdb = Download::where('id',$file_id)->where('file_name',$file_name)->first();
-        $filePath = base_path('/public/files/downloadsFile/');
-        $fileNameForUnlink = $filePath.$deltfromdb->file_name;
+        $fileNameForUnlink = $deltfromdb->file_path.$deltfromdb->file_name;
         unlink($fileNameForUnlink);
         $deltfromdb->delete();
 
@@ -224,7 +229,8 @@ class DownloadsController extends Controller
     public function restoreDownload(Request $request, $restore_id){
         $restore_id = $restore_id;
         $restoreFile = Download::where('id',$restore_id)->update([
-            'is_active'=>0
+            'is_active'=>0,
+            'is_active_str'=>'Active'
         ]);
         if ($restoreFile) {
             return redirect()->back()->with('restoreComplete','File restore complete!');

@@ -39,7 +39,7 @@ class DownloadController extends Controller
         SEOTools::twitter()->setSite('@technoaogee');
         SEOTools::jsonLd()->addImage('https://technoapogee.com/public/image/FrontEnd/logoFav/logo.PNG');
         $enlishtmentsDocuments = $enlist_slug;
-        $checkEnlishtment = Download::where('file_category_slug',$enlishtmentsDocuments)->get()->reverse();
+        $checkEnlishtment = Download::where('file_category_slug',$enlishtmentsDocuments)->where('is_active_str','Active')->get()->reverse();
         if($checkEnlishtment){
             return view('FrontEndView.downloads.enlishtments',[
                 'checkEnlishtment'=>$checkEnlishtment
@@ -59,7 +59,7 @@ class DownloadController extends Controller
         SEOTools::twitter()->setSite('@technoaogee');
         SEOTools::jsonLd()->addImage('https://technoapogee.com/public/image/FrontEnd/logoFav/logo.PNG');
         $produtDataSheet = $prod_slug;
-        $checkProDataSheet = Download::where('file_category_slug',$produtDataSheet)->get()->reverse();
+        $checkProDataSheet = Download::where('file_category_slug',$produtDataSheet)->where('is_active_str','Active')->get()->reverse();
         if($checkProDataSheet){
             return view('FrontEndView.downloads.datasheet',[
                 'checkProDataSheet'=>$checkProDataSheet

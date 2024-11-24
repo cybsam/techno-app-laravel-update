@@ -10,6 +10,7 @@ use Image;
 use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\projectCategory;
+use App\Models\Project;
 
 
 class ProjectCategoryController extends Controller
@@ -41,6 +42,24 @@ class ProjectCategoryController extends Controller
             return redirect()->back()->with('succ','Project Category Insert successfully!');
         }else{
             return redirect()->back()->with('err','Something Went wrong!');
+        }
+    }
+
+    public function ProjectCategorydelete(Request $request, $category_id){
+        $categoryId = $category_id;
+
+        $categoryFinding = projectCategory::where('id',$categoryId)->first();
+        $categorySlug = $categoryFinding->project_category_slug;
+
+        $checkProjectIsAvailable = Project::where('project_category_slug', $categorySlug)->get();
+        $counted = count($checkProjectIsAvailable);
+        
+        if($counted <= 0){
+            $deleteCategory = $categoryFinding->delete();
+            return redirect()->back()->with('categoryDeleteCom','Category delete complete');
+        }else{
+            $msg = "You need to delete ".$counted." Project Details";
+            return redirect()->back()->with('categoryDeleteProb',$msg);
         }
     }
 }

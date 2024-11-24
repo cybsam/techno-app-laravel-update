@@ -93,7 +93,7 @@ Route::prefix('en/Administrator')->middleware(['auth:web','isAdmin','isVerifyEma
     Route::get('Project/Category/Index',[App\Http\Controllers\Administrator\Project\ProjectCategoryController::class, 'showCategory'])->name('SupUser.ProjectCategoryShow');
     Route::post('Project/Category/Insert',[App\Http\Controllers\Administrator\Project\ProjectCategoryController::class, 'ProjectCategoryInsert'])->name('SupUser.ProjectCategoryInsert');
     Route::post('Project/Category/Update',[App\Http\Controllers\Administrator\Project\ProjectCategoryController::class, 'ProjectCategoryUpdate'])->name('SupUser.ProjectCategoryUpdate');
-    Route::post('Project/Category/Delete',[App\Http\Controllers\Administrator\Project\ProjectCategoryController::class, 'ProjectCategorydelete'])->name('SupUser.ProjectCategoryDelete');
+    Route::get('Project/Category/Delete/{category_id}',[App\Http\Controllers\Administrator\Project\ProjectCategoryController::class, 'ProjectCategorydelete'])->name('SupUser.ProjectCategoryDelete');
     // end Project
 
     // product and service start

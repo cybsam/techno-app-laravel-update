@@ -53,6 +53,7 @@
             width: 100%;
         }
     </style>
+    @stack('dashboard_css')
 </head>
 <body>
     @include('layouts.SupUserInc.SupUserNav')
@@ -91,6 +92,7 @@
         });
     </script>
     @yield('js')
+    @stack('dashboard_js')
 
 </body>
 

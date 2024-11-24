@@ -47,10 +47,12 @@ class DownloadsController extends Controller
     public function InsertedFileSave(Request $request){
         $request->validate([
             'file_category'=>['required'],
+            'image' => ['required','mimes:png,jpg,gif,webp,jpeg,ico,svg'],
             'fileRemarks'=>['required'],
             'uploadFileName'=>['required','mimes:pdf,doc,docx,zip,csv,xls,xlsx','max:10000'],
             
         ],[
+            'image.required'=>'Image require',
             'uploadFileName.required'=>'File required and its extension is pdf, csv, doc, docx, xls, xlsx',
             'fileRemarks.required'=>'File name or Remarks required!'
         ]);
@@ -77,27 +79,31 @@ class DownloadsController extends Controller
                     $fileName = $fileRemarksSlug.'-'.$categorySlug.'-'.$currenttime.'.'.$fileExtension;
 
                     // location
-                    $fileLocation = base_path('/public/files/downloadsFile/');
+                    $fileLocation = base_path('/public/files/downloadsFile');
 
-                    if ($fileName) {
-                        $request->file('uploadFileName')->move($fileLocation, $fileName);
+                    $uploadCloudnary = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
+                    $url = cloudinary()->getUrl($uploadCloudnary);
+
                     
-                        $insDownload = new Download();
-                        // $insDownload->blog_id = $othersCategoryId;
-                        $insDownload->file_category = $categoryName;
-                        $insDownload->file_category_slug = $categorySlug;
-                        $insDownload->file_extension = $fileType;
-                        $insDownload->file_path = $fileLocation;
-                        $insDownload->file_name = $fileName;
-                        $insDownload->remarks = $request->fileRemarks;
-                        $insDownload->description = $request->description;
-                        $dateaSave = $insDownload->save();
-                        if($dateaSave){
-                            return redirect()->back()->with('fileUploadSuccess','Successfully upload this file');
-                        }else{
-                            return redirect()->back()->with('fileUploadFailed','Oops man, why are you over-cleaver??? damn f**k!');
-                        }
+                    $request->file('uploadFileName')->move($fileLocation, $fileName);
+                
+                    $insDownload = new Download();
+                    
+                    $insDownload->file_category = $categoryName;
+                    $insDownload->file_category_slug = $categorySlug;
+                    $insDownload->file_extension = $fileType;
+                    $insDownload->file_path = $fileLocation;
+                    $insDownload->file_name = $fileName;
+                    $insDownload->remarks = $request->fileRemarks;
+                    $insDownload->picture = $uploadCloudnary;
+                    $insDownload->description = $request->description;
+                    $dateaSave = $insDownload->save();
+                    if($dateaSave){
+                        return redirect()->back()->with('fileUploadSuccess','Successfully upload this file');
+                    }else{
+                        return redirect()->back()->with('fileUploadFailed','Oops man, why are you over-cleaver??? damn f**k!');
                     }
+                    
 
                 }else{
                     // others category id and category name
@@ -125,8 +131,11 @@ class DownloadsController extends Controller
                     // location
                     $fileLocation = base_path('/public/files/downloadsFile');
 
-                    if($othersCateName == 'blog'){
+                    
 
+                    if($othersCateName == 'blog'){
+                        $uploadCloudnary = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
+                    
                         $request->file('uploadFileName')->move($fileLocation, $fileName);
 
                         $insDownload = new Download();
@@ -137,6 +146,7 @@ class DownloadsController extends Controller
                         $insDownload->file_path = $fileLocation;
                         $insDownload->file_name = $fileName;
                         $insDownload->remarks = $request->fileRemarks;
+                        $insDownload->picture = $uploadCloudnary;
                         $insDownload->description = $request->description;
                         $dateaSave = $insDownload->save();
                         if ($dateaSave) {
@@ -145,7 +155,8 @@ class DownloadsController extends Controller
                             return redirect()->back()->with('fileUploadFailed','Something went wrong to upload this file');
                         }
                     }elseif ($othersCateName == 'product') {
-
+                        $uploadCloudnary = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
+                    
                         $request->file('uploadFileName')->move($fileLocation, $fileName);
 
                         $insDownload = new Download();
@@ -156,6 +167,7 @@ class DownloadsController extends Controller
                         $insDownload->file_path = $fileLocation;
                         $insDownload->file_name = $fileName;
                         $insDownload->remarks = $request->fileRemarks;
+                        $insDownload->picture = $uploadCloudnary;
                         $insDownload->description = $request->description;
                         $dateaSave = $insDownload->save();
                         if ($dateaSave) {
@@ -164,6 +176,8 @@ class DownloadsController extends Controller
                             return redirect()->back()->with('fileUploadFailed','Something went wrong to upload this file');
                         }
                     }elseif ($othersCateName == 'project') {
+                        $uploadCloudnary = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
+                    
                         $request->file('uploadFileName')->move($fileLocation, $fileName);
 
                         $insDownload = new Download();
@@ -174,6 +188,7 @@ class DownloadsController extends Controller
                         $insDownload->file_path = $fileLocation;
                         $insDownload->file_name = $fileName;
                         $insDownload->remarks = $request->fileRemarks;
+                        $insDownload->picture = $uploadCloudnary;
                         $insDownload->description = $request->description;
                         $dateaSave = $insDownload->save();
                         if ($dateaSave) {

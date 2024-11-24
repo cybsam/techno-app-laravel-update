@@ -13,12 +13,13 @@
     <div class="container">
         <div class="row g-3">
             @foreach ($checkEnlishtment as $enlishtment)
-            <div class="col-12 col-md-6 col-lg-4">
+            <div class="col-12 col-md-6 col-lg-3">
                 <div class="mt-3"></div>
                 <div class="card">
                     <div class="card-body">
-                        <p class="card-title">{{ $enlishtment->remarks }}</p>
-                        <a href="{{ $enlishtment->file_path }}/{{ $enlishtment->file_name }}" class="btn btn-outline-success">Download</a>
+                        <img src="{{ $enlishtment->picture }}" alt="">
+                        <p class="card-title">{{ Str::limit($enlishtment->remarks, 25,'...') }}</p>
+                        <a href="https://technoapogee.com/public/files/downloadsFile/{{ $enlishtment->file_name }}" class="btn btn-outline-success">Download</a>
                     </div>
                 </div>
                 <div class="mt-3"></div>

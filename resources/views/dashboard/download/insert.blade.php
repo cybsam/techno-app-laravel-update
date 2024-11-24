@@ -67,7 +67,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <span style="color: red;"><b>Must select this category</b> *</span>
+                            <b>Must select this category<span style="color: red;"> *</span></b>
                             <select class="form-control" name="file_category" id="file_category">
                                 <option value="null" selected>Selecte File category type</option>
                                 <option value="1.enlistment-document">ENLISTMENT DOCUMENTS</option>
@@ -79,7 +79,15 @@
                         </div>
 
                         <div class="form-group">
-                            <span style="color: red;"><b>File Name * </b></span>
+                            <b>Image<span style="color: red;"> *</span></b>
+                            <input type="file" class="form-control" name="image" id="image">
+                            @error('image')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <b>File Name<span style="color: red;"> * </span></b>
                             <textarea name="fileRemarks" class="form-control" id="fileRemarks">{{ old('fileRemarks') }}</textarea>
                             @error('fileRemarks')
                                 <span class="text-danger">{{ $message }}</span>

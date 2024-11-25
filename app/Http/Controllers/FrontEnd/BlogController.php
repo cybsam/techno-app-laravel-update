@@ -21,14 +21,16 @@ use Artesaos\SEOTools\Facades\SEOTools;
 class BlogController extends Controller
 {
     public function index(){
-        SEOTools::setTitle('Blogs we write our experiance');
-        SEOTools::setDescription('Techno Apogee started its operation in June 2006 in Dhaka, Bangladesh. We provide the best EPC support in Bangladesh&#039;s Fire Electrical &amp; Automation field. We confirm the most precise and cost-effective solution for Government and private sectors in Bangladesh.');
+        SEOTools::setTitle('Article we writes our experience');
+        SEOTools::setDescription('Article we write our own experiences, having fun.');
         SEOTools::opengraph()->setUrl(URL::current());
         SEOTools::setCanonical('https://technoapogee.com/en/blog');
         SEOTools::opengraph()->addProperty('type', 'Blogs');
         SEOTools::twitter()->setSite('@technoaogee');
         SEOTools::jsonLd()->addImage('https://technoapogee.com/public/image/FrontEnd/logoFav/logo.PNG');
-        $fetchAllBlocgFromDb = Blog::where('__blog_status',0)->latest()->get();
+
+        $fetchAllBlocgFromDb = Blog::where('__blog_status',0)->latest()->paginate(12);
+
         return view('FrontEndView.blog.index',[
             'fetchAllBlocgFromDb'=>$fetchAllBlocgFromDb,
         ]);

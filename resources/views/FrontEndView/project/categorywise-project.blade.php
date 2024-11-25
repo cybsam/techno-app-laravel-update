@@ -35,7 +35,7 @@
                         
                     </div>
                 @endforeach
-                <div>
+                <div class="d-flex justify-content-center">
                     {{ $categoryWiseProjectList->links() }}
                 </div>
             </div>

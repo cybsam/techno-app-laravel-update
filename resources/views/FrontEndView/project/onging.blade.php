@@ -30,7 +30,7 @@
                         </a>
                     </div>
                 @endforeach
-                <div>
+                <div class="d-flex justify-content-center">
                     {{ $onGoingProject->links() }}
                 </div>
             </div>

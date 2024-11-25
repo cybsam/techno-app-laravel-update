@@ -35,14 +35,14 @@ class DownloadController extends Controller
 
     public function enlishtmentsDocuments(Request $request, $enlist_slug){
         SEOTools::setTitle('Enlishtment Documents');
-        SEOTools::setDescription('Techno Apogee started its operation in June 2006 in Dhaka, Bangladesh. We provide the best EPC support in Bangladesh&#039;s Fire Electrical &amp; Automation field. We confirm the most precise and cost-effective solution for Government and private sectors in Bangladesh.');
+        SEOTools::setDescription('We confirm the most precise and cost-effective solution for Government and private sectors in Bangladesh.');
         SEOTools::opengraph()->setUrl(URL::current());
         SEOTools::setCanonical('https://technoapogee.com/');
         SEOTools::opengraph()->addProperty('type', 'Company Profile');
         SEOTools::twitter()->setSite('@technoaogee');
         SEOTools::jsonLd()->addImage('https://technoapogee.com/public/image/FrontEnd/logoFav/logo.PNG');
         $enlishtmentsDocuments = $enlist_slug;
-        $checkEnlishtment = Download::where('file_category_slug',$enlishtmentsDocuments)->where('is_active_str','Active')->get()->reverse();
+        $checkEnlishtment = Download::where('file_category_slug',$enlishtmentsDocuments)->where('is_active_str','Active')->latest()->paginate(16);
         if($checkEnlishtment){
             return view('FrontEndView.downloads.enlishtments',[
                 'checkEnlishtment'=>$checkEnlishtment
@@ -55,14 +55,14 @@ class DownloadController extends Controller
 
     public function ProductDataSheet(Request $request, $prod_slug){
         SEOTools::setTitle('Product Datasheet');
-        SEOTools::setDescription('Techno Apogee started its operation in June 2006 in Dhaka, Bangladesh. We provide the best EPC support in Bangladesh&#039;s Fire Electrical &amp; Automation field. We confirm the most precise and cost-effective solution for Government and private sectors in Bangladesh.');
+        SEOTools::setDescription('We confirm the most precise and cost-effective solution for Government and private sectors in Bangladesh.');
         SEOTools::opengraph()->setUrl(URL::current());
         SEOTools::setCanonical('https://technoapogee.com/');
         SEOTools::opengraph()->addProperty('type', 'Company Profile');
         SEOTools::twitter()->setSite('@technoaogee');
         SEOTools::jsonLd()->addImage('https://technoapogee.com/public/image/FrontEnd/logoFav/logo.PNG');
         $produtDataSheet = $prod_slug;
-        $checkProDataSheet = Download::where('file_category_slug',$produtDataSheet)->where('is_active_str','Active')->get()->reverse();
+        $checkProDataSheet = Download::where('file_category_slug',$produtDataSheet)->where('is_active_str','Active')->latest()->paginate(16);
         if($checkProDataSheet){
             return view('FrontEndView.downloads.datasheet',[
                 'checkProDataSheet'=>$checkProDataSheet

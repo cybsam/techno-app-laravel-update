@@ -25,6 +25,9 @@
                 <div class="mt-3"></div>
             </div>
             @endforeach
+            <div class="d-flex justify-content-center">
+                {{ $checkProDataSheet->links() }}
+            </div>
         </div>
     </div>
 

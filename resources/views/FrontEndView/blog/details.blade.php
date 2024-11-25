@@ -3,24 +3,10 @@
 
 @section('content')
 
-    <div class="rs-breadcrumbs">
-        <div class="container">
-            <div class="breadcrumbs-inner">
-                <h1 class="page-title " style="color:#ffffff">
-                    {{ $blogDetailesView->__blog_name }}
-                </h1>
-            </div>
-        </div>
-    </div>
+    
+    <br><hr><br>
     <style>
-        body {
-            margin-top: 20px;
-        }
-
-        /*
-    Blog post entries
-    */
-
+        
         .entry-card {
             -webkit-box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.05);
             -moz-box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.05);
@@ -306,7 +292,7 @@
                                         </li>
                                         <li class="list-inline-item">
                                             
-                                            <i class="fa fa-calendar-o"></i> <a href="#">29 June 2017</a>
+                                            <i class="fa fa-calendar-o"></i> <a href="#">{{ $blogDetailesView->created_at }}</a>
                                         </li>
                                         <li class="list-inline-item">
                                             <i class="fa fa-tags"></i> <a href="#">Techno Apogee Blog</a>
@@ -373,7 +359,7 @@
                                             alt="Generic placeholder image">
                                         <div class="media-body">
                                             <h5 class="mt-0 mb-1"><a href="{{ route('FrontEndBlog.ShowSingleBlog',['blog_slug'=>$reletedBlog->__blog_slug]) }}"><i>{{ $reletedBlog->__blog_name }}</i></a></h5>
-                                            April 05, 2017
+                                            {{ $reletedBlog->created_at }}
                                         </div>
                                     </li>
                                     @endforeach

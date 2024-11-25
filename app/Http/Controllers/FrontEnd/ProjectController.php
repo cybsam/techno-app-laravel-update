@@ -25,7 +25,7 @@ use Artesaos\SEOTools\Facades\SEOTools;
 class ProjectController extends Controller
 {
     public function onGoingProject(){
-        $onGoingProject = Project::where('is_ongoing','1')->get()->reverse();
+        $onGoingProject = Project::where('is_ongoing','1')->latest()->paginate(12);
         
         SEOTools::setTitle('On Going Project');
             SEOTools::setDescription('We manage complex projects offering results that fit our client’s needs including general contracting, design, construction management, business development, feasibility studies and production planning among others. We are committed to continuous training and instruction to ensure a safe working environment for our employees and the clients we serve. We also provide a full range of virtual design and construction services, as well as the latest in smart mapping and computerized modeling with our In house expert and chartered highly qualified expert consultant.');
@@ -42,7 +42,7 @@ class ProjectController extends Controller
 
     public function CompleteProjectList(Request $request, $project_cate_slug){
         $pro_slug = $project_cate_slug;
-        $categoryWiseProjectList = Project::where('is_ongoing',0)->where('project_category_slug',$pro_slug)->get();
+        $categoryWiseProjectList = Project::where('is_ongoing',0)->where('project_category_slug',$pro_slug)->latest()->paginate(12);
 
         if ($pro_slug && $categoryWiseProjectList) {
             SEOTools::setTitle('Complete Project List');

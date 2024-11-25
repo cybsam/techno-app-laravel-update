@@ -35,6 +35,9 @@
                         
                     </div>
                 @endforeach
+                <div>
+                    {{ $categoryWiseProjectList->links() }}
+                </div>
             </div>
         </div>
     </div>

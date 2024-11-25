@@ -165,6 +165,18 @@ Route::prefix('en/Administrator')->middleware(['auth:web','isAdmin','isVerifyEma
     
     // end list download
 
+    // company profile
+
+    Route::get('company-profile-pdf/index', [App\Http\Controllers\Administrator\Download\DownloadsController::class, 'companyProfileIndex'])->name('supUser.companyProfileShow');
+    Route::get('company-profile-pdf/insert', [App\Http\Controllers\Administrator\Download\DownloadsController::class, 'companyProfileInsert'])->name('supUser.companyProfileInsert');
+    Route::post('company-profile-pdf/insert/save', [App\Http\Controllers\Administrator\Download\DownloadsController::class, 'companyProfileInsertSave'])->name('supUser.companyProfileInsertSave');
+    Route::get('company-profile-pdf/delete/{pdf_id}/{pdf}', [App\Http\Controllers\Administrator\Download\DownloadsController::class, 'companyProfileDelete'])->name('supUser.companyProfileDelete');
+    Route::get('company-profile-pdf/active/{pdf_id}/{pdf}', [App\Http\Controllers\Administrator\Download\DownloadsController::class, 'companyProfileActive'])->name('supUser.companyProfileActive');
+    Route::get('company-profile-pdf/deactive/{pdf_id}/{pdf}', [App\Http\Controllers\Administrator\Download\DownloadsController::class, 'companyProfileDeactive'])->name('supUser.companyProfileDeactive');
+    
+
+    // end company profile
+
     //contact
     Route::get('contact/front',[App\Http\Controllers\Administrator\DashboardController::class, 'ContactFrontEnd'])->name('supUser.FrontEndContact');
     Route::get('contact/front/{id}/show',[App\Http\Controllers\Administrator\DashboardController::class, 'ContactFrontEndShow'])->name('supUser.FrontEndContactShow');

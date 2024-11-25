@@ -13,12 +13,13 @@ use App\Models\Blog;
 use App\Models\ProductService;
 use App\Models\Project;
 use App\Models\ProductServiceSub;
+use App\Models\CompanyProfile;
 use Error;
 
 class DownloadsController extends Controller
 {
     public function indexList(Request $request){
-        $downloadFileList = Download::where('is_active',0)->get();
+        $downloadFileList = Download::where('is_active',0)->latest()->get();
         return view('dashboard.download.index',[
             'downloadFileList'=>$downloadFileList,
         ]);
@@ -37,7 +38,7 @@ class DownloadsController extends Controller
     }
 
     public function archivelist(){
-        $downloadFileList = Download::where('is_active',1)->get();
+        $downloadFileList = Download::where('is_active',1)->latest()->get();
         return view('dashboard.download.archive',[
             'downloadFileList'=>$downloadFileList,
         ]);
@@ -249,7 +250,8 @@ class DownloadsController extends Controller
         $file_id = $archive_id;
         $file_name = $file_name;
         $deltfromdb = Download::where('id',$file_id)->where('file_name',$file_name)->first();
-        $fileNameForUnlink = $deltfromdb->file_path.$deltfromdb->file_name;
+        $fileLocation = base_path('/public/files/downloadsFile');
+        $fileNameForUnlink = $fileLocation.'/'.$deltfromdb->file_name;
         unlink($fileNameForUnlink);
         $deltfromdb->delete();
 
@@ -270,6 +272,112 @@ class DownloadsController extends Controller
             return redirect()->back()->with('restoreComplete','File restore complete!');
         }else {
             abort(403);
+        }
+    }
+
+
+    // company profile controller
+    public function companyProfileIndex(Request $request){
+        $listPdf = CompanyProfile::latest()->get();
+            
+        return view('dashboard.profilepdf.index',[
+            'listPdf'=>$listPdf
+        ]);
+    }
+    // insert view
+    public function companyProfileInsert(){
+        return view('dashboard.profilepdf.insert');
+    }
+    // insert save
+    public function companyProfileInsertSave(Request $request){
+        $request->validate([
+            'identity' => ['required'],
+            'pdf' => ['required','mimes:pdf']
+        ]);
+
+        $fileNameSlug = Str::slug($request->input('identity'));
+        $extension = $request->file('pdf')->getClientOriginalExtension();
+        $pdfName = $fileNameSlug.'.'.$extension;
+        $file_path = base_path('/public/files/company-profile');
+
+        $checkIsAvailable = CompanyProfile::where('pdf',$pdfName)->first();
+        if($checkIsAvailable){
+            return redirect()->back()->with('fileAlreadyAvailable','Files already available, change something in identity field!');
+        }else {
+            $request->file('pdf')->move($file_path,$pdfName);
+            $status = 'InActive';
+            $instPdf = new CompanyProfile;
+            $instPdf->pdf = $pdfName;
+            $instPdf->status = $status;
+            $instPdf->admin = Auth::user()->username;
+            $saveDb = $instPdf->save();
+            if ($saveDb) {
+                return redirect()->route('supUser.companyProfileShow')->with('pdfInsertComplete','PDF insert succefully complete!');
+            }else {
+                return redirect()->back()->with('fileAlreadyAvailable','Something went wrong!');
+            }
+        }
+    }
+
+    // delete pdf
+    public function companyProfileDelete(Request $request, $pdf_id, $pdf){
+        $checking = CompanyProfile::where('id',$pdf_id)->where('pdf',$pdf)->first();
+
+        if ($checking->status == 'Active') {
+            return redirect()->back()->with('pdfhavingProblem','PDF file active, plase inactive and delete');
+        }else {
+            $allChecking = CompanyProfile::where('status','Active')->get();
+            if (count($allChecking) == 1) {
+                $base_path = base_path('/public/files/company-profile');
+                $fileNam = $base_path.'/'.$checking->pdf;
+                unlink($fileNam);
+                $dlt = $checking->delete();
+                if ($dlt) {
+                    return redirect()->back()->with('pdfInsertComplete','Delete Done!');
+                }else {
+                    return redirect()->back()->with('pdfhavingProblem','Something went wrong!');
+                }
+            }else {
+                return redirect()->back()->with('pdfhavingProblem','You are not select another pdf');
+            }
+            
+        }
+    }
+
+    public function companyProfileActive(Request $request, $pdf_id, $pdf){
+        $checking = CompanyProfile::where('id',$pdf_id)->where('pdf',$pdf)->first();
+        $active = 'Active';
+
+        $allChecking = CompanyProfile::where('status','Active')->get();
+        if (count($allChecking) == 1 && $checking) {
+            return redirect()->back()->with('pdfhavingProblem','we do not active two pdf!');
+        }else {
+            $Update = $checking->update([
+                'status'=>$active
+            ]);
+            if ($Update) {
+                return redirect()->back()->with('pdfInsertComplete','Active Done!');
+            }else {
+                return redirect()->back()->with('pdfhavingProblem','Something went wrong!');
+            }
+        }
+    }
+
+    public function companyProfileDeactive(Request $request, $pdf_id, $pdf){
+        $checking = CompanyProfile::where('id',$pdf_id)->where('pdf',$pdf)->first();
+        $InActive = 'InActive';
+
+        if ($checking) {
+            $Update = $checking->update([
+                'status'=>$InActive
+            ]);
+            if ($Update) {
+                return redirect()->back()->with('pdfInsertComplete','Inactive Complete!');
+            }else {
+                return redirect()->back()->with('pdfhavingProblem','Something went wrong!');
+            }
+        }else {
+            return redirect()->back()->with('pdfhavingProblem','Not found!');
         }
     }
 

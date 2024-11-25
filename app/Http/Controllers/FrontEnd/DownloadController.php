@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Download;
 use Illuminate\Support\Facades\URL;
+use App\Models\CompanyProfile;
 // seo tools
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Artesaos\SEOTools\Facades\OpenGraph;
@@ -19,6 +20,8 @@ class DownloadController extends Controller
 {
     public function CompanyProfileShow(Request $request){
 
+        $companyProfilePdf = CompanyProfile::where('status','Active')->first();
+
         SEOTools::setTitle('Company Profile ');
         SEOTools::setDescription('Techno Apogee started its operation in June 2006 in Dhaka, Bangladesh. We provide the best EPC support in Bangladesh&#039;s Fire Electrical &amp; Automation field. We confirm the most precise and cost-effective solution for Government and private sectors in Bangladesh.');
         SEOTools::opengraph()->setUrl(URL::current());
@@ -27,7 +30,7 @@ class DownloadController extends Controller
         SEOTools::twitter()->setSite('@technoaogee');
         SEOTools::jsonLd()->addImage('https://technoapogee.com/public/image/FrontEnd/logoFav/logo.PNG');
 
-        return view('FrontEndView.downloads.companyProfileShow');
+        return view('FrontEndView.downloads.companyProfileShow',['companyProfilePdf'=>$companyProfilePdf]);
     }
 
     public function enlishtmentsDocuments(Request $request, $enlist_slug){

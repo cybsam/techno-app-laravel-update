@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="embed-responsive embed-responsive-16by9">
-                    <iframe class="embed-responsive-item" style="width:100%; height:500px;" frameborder="0" src="https://technoapogee.com/public/files/Portfolio-of-Techno-Apogee.pdf" allowfullscreen></iframe>
+                    <iframe class="embed-responsive-item" style="width:100%; height:500px;" frameborder="0" src="/public/files/company-profile/{{ $companyProfilePdf->pdf }}" allowfullscreen></iframe>
                   </div>
             </div>
         </div>

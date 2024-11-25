@@ -93,7 +93,7 @@
         </div>
     </div>
     <!-- Services Section End -->
-
+    
     <!-- About Section Start -->
     <div class="rs-about style5 relative pt-140 md-pt-80">
         <div class="container">
@@ -262,3 +262,6 @@
 </div> 
 <!-- Main content End -->
 @endsection
+@push('frontJs')
+<script>document.getElementById('yearsOfExperience').innerHTML = new Date().getFullYear() - 2007;</script>
+@endpush

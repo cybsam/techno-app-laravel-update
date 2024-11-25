@@ -119,13 +119,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PWS2G6NM"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
-<script>
-            
-    var newYear = new Date();
-    var pastYear = newYear.getFullYear() - 2007;
-    document.getElementById('yearsOfExperience').innerHTML = pastYear;
-    
-</script>
+
         <!-- modernizr js -->
         <script src="{{ asset('js/FrontEnd/js/modernizr-2.8.3.min.js')}}"></script>
         <!-- jquery latest version -->
@@ -159,6 +153,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <script src="{{ asset('js/FrontEnd/js/main.js')}}"></script>
         <script src="https://kit.fontawesome.com/17569ebc40.js" crossorigin="anonymous"></script>
         <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+        @stack('frontJs')
     </body>
 
 </html>

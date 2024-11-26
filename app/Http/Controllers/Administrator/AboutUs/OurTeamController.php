@@ -39,15 +39,13 @@ class OurTeamController extends Controller
         ]);
         
         $input = $request->all();
-        $departmentExplode = explode('.',$input['department']);
-        $deginationEplode = explode('.',$input['degination']);
 
         if($input['department'] == '0' || $input['degination'] == '0'){
             return redirect()->back()->with('validerr','Department or Degination is missing!');
         }else{
             if($request->hasFile('image')){
                 $nameStr = Str::slug($input['name']);
-                $deginaStr = Str::slug($deginationEplode[1]);
+                $deginaStr = Str::slug($input['degination']);
                 $inpImage = $request->file('image');
                 $randstr = Carbon::now()->format('Y-m-d-H-i-s-u');
                 $imageNameNew = $nameStr.'-'.$deginaStr.'-'.$randstr.'.'.$inpImage->getClientOriginalExtension();
@@ -56,8 +54,8 @@ class OurTeamController extends Controller
 
                 $insertDataDB = new AboutOurTeam();
                 $insertDataDB->name = $input['name'];
-                $insertDataDB->department = $departmentExplode[1];
-                $insertDataDB->degination = $deginationEplode[1];
+                $insertDataDB->department = $input['department'];
+                $insertDataDB->degination = $input['degination'];
                 $insertDataDB->email = $input['email'];
                 $insertDataDB->mobile = $input['mobile'];
                 $insertDataDB->whatsapp = $input['whatsapp'];
@@ -168,7 +166,6 @@ class OurTeamController extends Controller
     }
 
     public function teamUpdatePost(Request $request){
-        
         $request->validate([
             'id'=>['required'],
             'name'=>['required','string'],
@@ -197,6 +194,7 @@ class OurTeamController extends Controller
 
             $storeLocation = base_path('public/image/about-us/our-team/'.$imageNameNew);
             Image::make($inpImage)->resize(310,310)->save($storeLocation);
+
             $membersDataupdate = AboutOurTeam::where('id',$request->id)->update([
                 'name'=>$request->input('name'),
                 'department'=>$request->input('department'),
@@ -213,6 +211,7 @@ class OurTeamController extends Controller
                 return redirect()->back()->with('memupderr','Something went wrong, try again');
             }
         }else {
+            
             $membersDataupdate = AboutOurTeam::where('id',$request->id)->update([
                 'name'=>$request->input('name'),
                 'department'=>$request->input('department'),

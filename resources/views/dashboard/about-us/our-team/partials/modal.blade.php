@@ -23,7 +23,7 @@
                         <select name="department" class="form-control" id="department">
                             <option value="{{ _('0') }}" selected>Select Department</option>
                             @foreach ($empSectionCategory as $key => $EmpSectionCat)
-                                <option value="{{ $EmpSectionCat->id }}{{ _('.') }}{{ $EmpSectionCat->team_department_slug }}">{{ $EmpSectionCat->team_department }}</option>
+                                <option value="{{ $EmpSectionCat->team_department_slug }}">{{ $EmpSectionCat->team_department }}</option>
                             @endforeach
                             
                         </select>
@@ -38,7 +38,7 @@
                         <select name="degination" class="form-control" id="degination">
                             <option value="{{ _('0') }}" selected>Select Degination</option>
                             @foreach ($empDeginationCategory as $key => $empDegination)
-                                <option value="{{ $empDegination->id }}{{ _('.') }}{{ $empDegination->team_department_sub_slug }}">{{ $empDegination->team_department_sub }}</option>
+                                <option value="{{ $empDegination->team_department_sub }}">{{ $empDegination->team_department_sub }}</option>
                             @endforeach
                         </select>
                         <div class="text-danger">

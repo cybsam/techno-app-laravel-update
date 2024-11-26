@@ -20,18 +20,32 @@
                 <div class="card">
                     <div class="card-header">
                         <h4>Member's Details</h4>
+                        <a href="{{ route('SupUser.OurTeam') }}" class="btn btn-secondary float-right"><-- Team List</a>
                     </div>
                     <div class="card-body">
-                        <div class="text-danger">
-                            @if (Session::get('memupderr'))
-                                <b>{{ Session::get('memupderr') }}</b>
+                        <div class="text-info">
+                            @if (Session::get('membupdcom'))
+                                <div class="alert alert-primary bg-primary text-light border-0 alert-dismissible fade show"
+                                    role="alert">
+                                    {{ Session::get('membupdcom') }}
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                
                             @endif
                         </div>
                         <div class="text-info">
-                            @if (Session::get('membupdcom'))
-                                <b>{{ Session::get('membupdcom') }}</b>
+                            @if (Session::get('memupderr'))
+                                <div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show"
+                                    role="alert">
+                                    {{ Session::get('memupderr') }}
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                                
                             @endif
                         </div>
+                        
                         <div class="">
                             @if ($errors->all())
                                 <span class="text-danger">
@@ -52,7 +66,7 @@
                             <div class="input-group mb-3">
 
                                 <select name="department" id="department" class="form-control">
-                                    <option value="{{ $membersInfor->department }}" selected>Department</option>
+                                    <option value="{{ $membersInfor->department }}" selected>{{ $membersInfor->department }}</option>
                                     @foreach ($empSectionCategory as $empSection)
                                         <option value="{{ $empSection->team_department_slug }}">{{ $empSection->team_department }}</option>
                                     @endforeach
@@ -60,9 +74,8 @@
 
                                 <span class="input-group-text">--</span>
                                 <select name="degination" id="degination" class="form-control">
-                                    <option value="{{ $membersInfor->degination }}">Desigination</option>
                                     @foreach ($empDeginationCategory as $empDegination)
-                                        <option value="{{ $empDegination->team_department_sub_slug }}">{{ $empDegination->team_department_sub }}</option>
+                                        <option value="{{ $empDegination->team_department_sub }}">{{ $empDegination->team_department_sub }}</option>
                                     @endforeach
                                 </select>
                             </div>

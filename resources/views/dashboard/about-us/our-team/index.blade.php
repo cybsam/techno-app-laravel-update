@@ -83,11 +83,11 @@
                                         <td>{{ Str::limit($listMember->mobile, 11) }}</td>
                                         <td>{{ Str::limit($listMember->email, 10) }}</td>
                                         <td>
-                                            <button class="badge {{ $listMember->is_active == 1 ? 'bg-warning':'bg-info'; }}" type="submit">
+                                            <button class="badge {{ $listMember->is_active == 1 ? 'bg-info':'bg-warning'; }}" type="submit">
                                                 @if ($listMember->is_active == 1)
-                                                    <a href="{{ route('SupUser.OurTeamDeactive',['team_id' => $listMember->id]) }}" onclick="alert('Deactivated...');" class="text-white">deactive</a>
+                                                    <a href="{{ route('SupUser.OurTeamDeactive',['team_id' => $listMember->id]) }}" onclick="alert('Deactivated...');" class="text-white">active</a>
                                                 @else
-                                                    <a href="{{ route('SupUser.OurTeamActive',['team_id' => $listMember->id]) }}" onclick="alert('Activate...');" class="text-white">active</a>
+                                                    <a href="{{ route('SupUser.OurTeamActive',['team_id' => $listMember->id]) }}" onclick="alert('Activate...');" class="text-white">deactive</a>
                                                 @endif
                                             </button>
                                         </td>

@@ -5,7 +5,7 @@
 
 
     <div class="pagetitle">
-        <h1>On Going Project</h1>
+        <h1>Archive List</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('Administrator.index') }}">Dashboard</a></li>
@@ -32,6 +32,11 @@
 </div>
 @endif
 
+<div class="">
+    <a href="{{ URL::previous() }}" class="btn btn-info">{{ __('Back') }} &#8617;</a>
+    <a href="{{ route('SupUser.ProjectCategoryShow') }}" class="btn btn-secondary">Categories list</a>
+    <a class="btn btn-primary float-right" href="{{ route('SupUser.ProjectOnGoing') }}">On-Going Project</a>
+</div>
     <table class="table table-hover datatable table-sm">
         <thead>
             <tr>

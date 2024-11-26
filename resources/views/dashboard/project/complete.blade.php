@@ -15,20 +15,25 @@
         </nav>
     </div>
     @if (Session::get('ProjectArchiveComplete'))
-    <div class="alert alert-primary bg-primary text-light border-0 alert-dismissible fade show"
-        role="alert">
-        {{ Session::get('ProjectArchiveComplete') }}
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"
-            aria-label="Close"></button>
-    </div>
-@endif
+        <div class="alert alert-primary bg-primary text-light border-0 alert-dismissible fade show" role="alert">
+            {{ Session::get('ProjectArchiveComplete') }}
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+<div class="">
+    <a href="{{ URL::previous() }}" class="btn btn-info">{{ __('Back') }} &#8617;</a>
+    <a href="{{ route('SupUser.ProjectCategoryShow') }}" class="btn btn-secondary">Categories list</a>
+    <a class="btn btn-primary float-right" href="{{ route('SupUser.ProjectOnGoing') }}">On-Going Project</a>
+    
+</div>
+<hr>
     <table class="table table-hover datatable table-sm">
         <thead>
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Project Name</th>
-                <th scope="col">Project Category</th>
-                <th scope="col">Project Image</th>
+                <th scope="col">Category</th>
+                <th scope="col">Image</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>

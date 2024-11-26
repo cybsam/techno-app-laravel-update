@@ -91,7 +91,7 @@ class ProjectController extends Controller
 
 
     public function ProjectOnGoing(){
-        $onGoingProject = Project::where('is_ongoing',1)->get();
+        $onGoingProject = Project::where('is_ongoing',1)->get()->reverse();
         return view('dashboard.project.on-going',[
             'onGoingProject'=>$onGoingProject,
         ]);

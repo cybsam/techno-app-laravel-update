@@ -24,9 +24,9 @@ Route::middleware(['guest:web'])->group(function(){
 });
 
 
-// Route::middleware(['middleware'=>'preventbackhistory'])->group(function(){
-//     Auth::routes();
-// });
+Route::middleware(['middleware'=>'preventbackhistory'])->group(function(){
+    Auth::routes();
+});
 
 
 
@@ -85,6 +85,4 @@ Route::prefix('en')->middleware(['guest:web'])->group(function(){
     Route::get('User/Verify/',[App\Http\Controllers\Auth\RegisterController::class, 'verify'])->name('user.verify');
 });
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -17,7 +17,7 @@
 
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#email-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-envelope"></i><span>Emails</span><i class="bi bi-chevron-down ms-auto"></i>
+                    <i class="bi bi-envelope"></i><span>Mail</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="email-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
@@ -25,21 +25,7 @@
                             <i class="bi bi-circle"></i><span>Compose</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="#">
-                            <i class="bi bi-download"></i><span>Inbox</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="bi bi-circle"></i><span>Drifts</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="bi bi-circle"></i><span>Trash</span>
-                        </a>
-                    </li>
+                    
                 </ul>
             </li>
 
@@ -69,16 +55,16 @@
                 </ul>
             </li><!-- End Components Nav -->
             
-            <li class="nav-heading">Our Project</li>
+            <li class="nav-heading">Project</li>
             
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#our_project_front" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-journal-text"></i><span>Our Project</span><i class="bi bi-chevron-down ms-auto"></i>
+                    <i class="bi bi-journal-text"></i><span>Project</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="our_project_front" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
                         <a href="{{ route('SupUser.ProjectOnGoing') }}" class="@if(URL::current() == route('SupUser.ProjectOnGoing')) active @endif">
-                            <i class="bi bi-circle"></i><span>On Going</span>
+                            <i class="bi bi-circle"></i><span>On-Going</span>
                         </a>
                     </li>
                     <li>
@@ -238,7 +224,7 @@
                     </li>
                     <li>
                         <a href="{{ route('SupUser.TeamManagementInsert') }}" class="@if(URL()->current() == route('SupUser.TeamManagementInsert')) active @endif">
-                            <i class="bi bi-circle"></i><span>Employee Management Department List</span>
+                            <i class="bi bi-circle"></i><span>Department List</span>
                         </a>
                     </li>
 
@@ -252,7 +238,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('supUser.FrontEndContact') }}">
                     <i class="bi bi-envelope"></i>
-                    <span>Contact Message <span class="badge bg-success badge-number">{{ $countUnSeenMsg }}</span></span>
+                    <span>Message <span class="badge bg-success badge-number">{{ $countUnSeenMsg }}</span></span>
                 </a>
             </li>
             

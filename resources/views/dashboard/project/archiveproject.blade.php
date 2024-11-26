@@ -44,6 +44,7 @@
                 <th scope="col">Project Name</th>
                 <th scope="col">Project Category</th>
                 <th scope="col">Project Image</th>
+                <th scope="col">User</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -54,6 +55,7 @@
                 <td>{{ $archiveProject->project_name }}</td>
                 <td>{{ $archiveProject->project_category_slug }}</td>
                 <td><img src="{{ asset('public/image/project') }}/{{ $archiveProject->project_header_image }}" alt="{{ $archiveProject->project_name }}" height="40px" width="80px"></td>
+                <td>{{ ucwords($archiveProject->project_added_by) }}</td>
                 <td>
                     <div class="button-group">
                         <button type="button" value="{{ $archiveProject->id }}" class="btn btn-primary btn-sm ProjectArchiveRestoreBTN"><i class="bi bi-arrow-clockwise"></i></button>

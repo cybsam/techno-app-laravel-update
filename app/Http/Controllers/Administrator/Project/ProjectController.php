@@ -64,7 +64,7 @@ class ProjectController extends Controller
                     $project->is_ongoing = $input['is_ongoing'];
                     $project->is_ongoing_str = $is_ongoing_str;
                     $project->active_status = $activeStatus;
-                    $project->project_added_by = Auth::user()->name;
+                    $project->project_added_by = Auth::user()->username;
                     $projectSave = $project->save();
                     $lastProjectId = $project->id;
                     if($request->hasFile('project_multiple_image')){
@@ -103,7 +103,7 @@ class ProjectController extends Controller
                     $project->is_ongoing = $input['is_ongoing'];
                     $project->is_ongoing_str = $is_ongoing_str;
                     $project->active_status = $activeStatus;
-                    $project->project_added_by = Auth::user()->name;
+                    $project->project_added_by = Auth::user()->username;
                     $projectSave = $project->save();
                     $lastProjectId = $project->id;
                     if($request->hasFile('project_multiple_image')){
@@ -243,6 +243,7 @@ class ProjectController extends Controller
                     $checkDBProject->is_ongoing = $request->input('is_ongoing');
                     $checkDBProject->is_ongoing_str = $is_ongoing_str;
                     $checkDBProject->active_status = $activeStatus;
+                    $checkDBProject->project_added_by = Auth::user()->username;
                     $projectUpdate = $checkDBProject->save();
 
                     if($projectUpdate){
@@ -265,6 +266,7 @@ class ProjectController extends Controller
                     $checkDBProject->is_ongoing = $request->input('is_ongoing');
                     $checkDBProject->is_ongoing_str = $is_ongoing_str;
                     $checkDBProject->active_status = $activeStatus;
+                    $checkDBProject->project_added_by = Auth::user()->username;
                     $projectUpdate = $checkDBProject->save();
 
                     if($projectUpdate){
@@ -322,6 +324,7 @@ class ProjectController extends Controller
                     $checkDBProject->is_ongoing = $request->input('is_ongoing');
                     $checkDBProject->is_ongoing_str = $is_ongoing_str;
                     $checkDBProject->active_status = $activeStatus;
+                    $checkDBProject->project_added_by = Auth::user()->username;
                     $projectUpdate = $checkDBProject->save();
 
                     if($projectUpdate){
@@ -344,6 +347,7 @@ class ProjectController extends Controller
                     $checkDBProject->is_ongoing = $request->input('is_ongoing');
                     $checkDBProject->is_ongoing_str = $is_ongoing_str;
                     $checkDBProject->active_status = $activeStatus;
+                    $checkDBProject->project_added_by = Auth::user()->username;
                     $projectUpdate = $checkDBProject->save();
 
                     if($projectUpdate){
@@ -364,6 +368,7 @@ class ProjectController extends Controller
         $archiveId = $request->input('ProjectArchiveModalId');
         Project::where('id',$archiveId)->update([
             'active_status'=>'InActive',
+            'project_added_by'=>Auth::user()->username
         ]);
         return redirect()->back()->with('ProjectArchiveComplete','Project Archive Complete, check it now!');
     }
@@ -379,6 +384,7 @@ class ProjectController extends Controller
         $restoreId = $request->input('ProjectRestoreBTNId');
         $restoreFromDb = Project::where('id',$restoreId)->update([
             'active_status'=>'Active',
+            'project_added_by'=>Auth::user()->username
         ]);
         if($restoreFromDb){
             return redirect()->back()->with('ProjectRestoreComplete','Project Restore Complete, make sure check in complete link!');
@@ -394,6 +400,16 @@ class ProjectController extends Controller
         $deleteImageFromLocation = base_path('public/image/project/'.$dbImage);
         unlink($deleteImageFromLocation);
         $deleteFromDbProject->delete();
+
+        $checkDBMultiple = ProjectMultipleImage::where('project_id',$deleteId)->get();
+        if($checkDBMultiple){
+            foreach($checkDBMultiple as $multiToSingle){
+                $multiImageLocationDlt = base_path('public/image/project/multipleimage/'.$multiToSingle->image);
+                unlink($multiImageLocationDlt);
+                $multiToSingle->delete();
+            }
+        }
+
         if($deleteFromDbProject){
             return redirect()->back()->with('ProjectDeleteComplete','Project Delete Complete!');
         }else{

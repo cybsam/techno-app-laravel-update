@@ -34,6 +34,7 @@
                 <th scope="col">Project Name</th>
                 <th scope="col">Category</th>
                 <th scope="col">Image</th>
+                <th scope="col">User</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -44,6 +45,7 @@
                 <td><a href="{{ route('SupUser.ProjectUpdate',['project_id'=>$completeProject->id,'project_slug'=>$completeProject->project_slug]) }}">{{ $completeProject->project_name }}</a></td>
                 <td>{{ $completeProject->project_category_slug }}</td>
                 <td><img src="{{ asset('public/image/project') }}/{{ $completeProject->project_header_image }}" alt="{{ $completeProject->project_name }}" height="60px" width="80px"></td>
+                <td>{{ ucwords($completeProject->project_added_by) }}</td>
                 <td>
                     <div class="button-group">
                         <a href="{{ route('SupUser.ProjectUpdate',['project_id'=>$completeProject->id,'project_slug'=>$completeProject->project_slug]) }}" class="btn btn-secondary btn-sm"><i class="bi bi-pencil-square"></i></a>

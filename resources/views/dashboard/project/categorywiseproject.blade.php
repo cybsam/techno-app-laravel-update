@@ -5,12 +5,13 @@
     @include('dashboard.summernote.summernote')
 
     <div class="pagetitle">
-        <h1>Complete Project</h1>
+        <h1>Category wise project list</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('Administrator.index') }}">Dashboard</a></li>
                 <li class="breadcrumb-item"><a href="{{ route('SupUser.ProjectOnGoing') }}">Project On-Going</a></li>
-                <li class="breadcrumb-item active">Complete Project</li>
+                <li class="breadcrumb-item"><a href="{{ route('SupUser.ProjectComplete') }}">Complete Project list</a></li>
+                <li class="breadcrumb-item active">Category wise project</li>
             </ol>
         </nav>
     </div>
@@ -33,16 +34,18 @@
                 <th scope="col">#</th>
                 <th scope="col">Project Name</th>
                 <th scope="col">Category</th>
+                <th scope="col">Group</th>
                 <th scope="col">Image</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($CompleteProject as $key => $completeProject)
+            @foreach ($fetchData as $key => $completeProject)
             <tr>
                 <td>{{ ++$key }}</td>
                 <td><a href="{{ route('SupUser.ProjectUpdate',['project_id'=>$completeProject->id,'project_slug'=>$completeProject->project_slug]) }}">{{ $completeProject->project_name }}</a></td>
                 <td>{{ $completeProject->project_category_slug }}</td>
+                <td>{{ ucwords($completeProject->is_ongoing_str) }}</td>
                 <td><img src="{{ asset('public/image/project') }}/{{ $completeProject->project_header_image }}" alt="{{ $completeProject->project_name }}" height="60px" width="80px"></td>
                 <td>
                     <div class="button-group">

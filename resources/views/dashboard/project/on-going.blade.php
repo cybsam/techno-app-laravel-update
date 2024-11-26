@@ -33,7 +33,7 @@
         <tbody>
             @foreach ($onGoingProject as $key => $onGoingProject)
             <tr>
-                <td>{{ $onGoingProject->id }}</td>
+                <td>{{ ++$key }}</td>
                 <td><a href="{{ route('SupUser.ProjectUpdate',['project_id'=>$onGoingProject->id,'project_slug'=>$onGoingProject->project_slug]) }}">{{ $onGoingProject->project_name }}</a></td>
                 <td>{{ $onGoingProject->project_category_slug }}</td>
                 <td><img src="{{ asset('public/image/project') }}/{{ $onGoingProject->project_header_image }}" alt="{{ $onGoingProject->project_name }}" height="40px" width="80px"></td>

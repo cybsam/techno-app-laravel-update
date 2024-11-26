@@ -46,40 +46,86 @@ class ProjectController extends Controller
                 $randstr = Carbon::now()->format('Y-m-d-H-i-s-u');
                 $headerImageNewName = $slug.'-'.$afterExplodeSlug[0].'-'.$randstr.'.'.$headerImage->getClientOriginalExtension();
 
-                $imagePath = base_path('public/image/project/'.$headerImageNewName);
-                Image::make($headerImage)->save($imagePath);
-
-                $project = new Project();
-                $project->project_name = $input['project_name'];
-                $project->project_slug = $slug;
-                $project->project_header_image = $headerImageNewName;
-                $project->project_category_slug = $afterExplodeSlug;
-                $project->project_keyword = $input['project_keyword'];
-                $project->project_scope = $input['project_scope'];
-                $project->project_type = $input['project_type'];
-                $project->project_location = $input['project_location'];
-                $project->project_description = $request->project_description;
-                $project->is_ongoing = $input['is_ongoing'];
-                $project->project_added_by = Auth::user()->name;
-                $projectSave = $project->save();
-                $lastProjectId = $project->id;
-                if($request->hasFile('project_multiple_image')){
-                    foreach($request->file('project_multiple_image') as $multipleImage){
-                        $multipleImageName = $slug.'-'.'multiple-'.rand(1,1000).'-'.$randstr.'.'.$multipleImage->getClientOriginalExtension();
-                        $multipleImageUploadLocation = base_path('public/image/project/multipleimage/'.$multipleImageName);
-                        Image::make($multipleImage)->resize(784,440)->save($multipleImageUploadLocation);
-                        ProjectMultipleImage::create([
-                            'project_id'=>$lastProjectId,
-                            'image'=>$multipleImageName,
-                            'added_by'=>Auth::user()->name
-                        ]);
+                if ($input['is_ongoing'] == 0) {
+                    $imagePath = base_path('public/image/project/'.$headerImageNewName);
+                    Image::make($headerImage)->save($imagePath);
+                    $is_ongoing_str = 'complete';
+                    $activeStatus = 'Active';
+                    $project = new Project();
+                    $project->project_name = $input['project_name'];
+                    $project->project_slug = $slug;
+                    $project->project_header_image = $headerImageNewName;
+                    $project->project_category_slug = $afterExplodeSlug;
+                    $project->project_keyword = $input['project_keyword'];
+                    $project->project_scope = $input['project_scope'];
+                    $project->project_type = $input['project_type'];
+                    $project->project_location = $input['project_location'];
+                    $project->project_description = $request->project_description;
+                    $project->is_ongoing = $input['is_ongoing'];
+                    $project->is_ongoing_str = $is_ongoing_str;
+                    $project->active_status = $activeStatus;
+                    $project->project_added_by = Auth::user()->name;
+                    $projectSave = $project->save();
+                    $lastProjectId = $project->id;
+                    if($request->hasFile('project_multiple_image')){
+                        foreach($request->file('project_multiple_image') as $multipleImage){
+                            $multipleImageName = $slug.'-'.'multiple-'.rand(1,1000).'-'.$randstr.'.'.$multipleImage->getClientOriginalExtension();
+                            $multipleImageUploadLocation = base_path('public/image/project/multipleimage/'.$multipleImageName);
+                            Image::make($multipleImage)->resize(784,440)->save($multipleImageUploadLocation);
+                            ProjectMultipleImage::create([
+                                'project_id'=>$lastProjectId,
+                                'image'=>$multipleImageName,
+                                'added_by'=>Auth::user()->name
+                            ]);
+                        }
                     }
-                }
 
-                if($projectSave){
-                    return redirect()->back()->with('ProjectInsertComplete','New Project Upload Successfully');
-                }else{
-                    return redirect()->back()->with('ProjectInsertFailed','Something went wrong!');
+                    if($projectSave){
+                        return redirect()->back()->with('ProjectInsertComplete','New Project Upload Successfully');
+                    }else{
+                        return redirect()->back()->with('ProjectInsertFailed','Something went wrong!');
+                    }
+                }elseif($input['is_ongoing'] == 1){
+                    $imagePath = base_path('public/image/project/'.$headerImageNewName);
+                    Image::make($headerImage)->save($imagePath);
+                    $is_ongoing_str = 'ongoing';
+                    $activeStatus = 'Active';
+                    $project = new Project();
+                    $project->project_name = $input['project_name'];
+                    $project->project_slug = $slug;
+                    $project->project_header_image = $headerImageNewName;
+                    $project->project_category_slug = $afterExplodeSlug;
+                    $project->project_keyword = $input['project_keyword'];
+                    $project->project_scope = $input['project_scope'];
+                    $project->project_type = $input['project_type'];
+                    $project->project_location = $input['project_location'];
+                    $project->project_description = $request->project_description;
+                    $project->is_ongoing = $input['is_ongoing'];
+                    $project->is_ongoing_str = $is_ongoing_str;
+                    $project->active_status = $activeStatus;
+                    $project->project_added_by = Auth::user()->name;
+                    $projectSave = $project->save();
+                    $lastProjectId = $project->id;
+                    if($request->hasFile('project_multiple_image')){
+                        foreach($request->file('project_multiple_image') as $multipleImage){
+                            $multipleImageName = $slug.'-'.'multiple-'.rand(1,1000).'-'.$randstr.'.'.$multipleImage->getClientOriginalExtension();
+                            $multipleImageUploadLocation = base_path('public/image/project/multipleimage/'.$multipleImageName);
+                            Image::make($multipleImage)->resize(784,440)->save($multipleImageUploadLocation);
+                            ProjectMultipleImage::create([
+                                'project_id'=>$lastProjectId,
+                                'image'=>$multipleImageName,
+                                'added_by'=>Auth::user()->name
+                            ]);
+                        }
+                    }
+
+                    if($projectSave){
+                        return redirect()->back()->with('ProjectInsertComplete','New Project Upload Successfully');
+                    }else{
+                        return redirect()->back()->with('ProjectInsertFailed','Something went wrong!');
+                    }
+                }else {
+                    abort(403);
                 }
             }else{
                 return redirect()->back()->with('ProjectInsertFailed','You are not selected Project Status, try again!');
@@ -91,14 +137,14 @@ class ProjectController extends Controller
 
 
     public function ProjectOnGoing(){
-        $onGoingProject = Project::where('is_ongoing',1)->get()->reverse();
+        $onGoingProject = Project::where('is_ongoing',1)->where('is_ongoing_str','ongoing')->where('active_status','Active')->get()->reverse();
         return view('dashboard.project.on-going',[
             'onGoingProject'=>$onGoingProject,
         ]);
     }
 
     public function ProjectComplete(){
-        $CompleteProject = Project::where('is_ongoing',0)->get();
+        $CompleteProject = Project::where('is_ongoing',0)->where('is_ongoing_str','complete')->where('active_status','Active')->get()->reverse();
         return view('dashboard.project.complete',[
             'CompleteProject'=>$CompleteProject,
         ]);
@@ -182,21 +228,52 @@ class ProjectController extends Controller
 
                 // end multiple 
                 
-                $checkDBProject->project_name = $request->input('project_name');
-                $checkDBProject->project_header_image = $ProjectImageNewName;
-                $checkDBProject->project_category_slug = $request->input('project_category_slug');
-                $checkDBProject->project_keyword = $request->input('project_keyword');
-                $checkDBProject->project_scope = $request->input('project_scope');
-                $checkDBProject->project_type = $request->input('project_type');
-                $checkDBProject->project_location = $request->input('project_location');
-                $checkDBProject->project_description = $request->input('project_description');
-                $checkDBProject->is_ongoing = $request->input('is_ongoing');
-                $projectUpdate = $checkDBProject->save();
+                if ($request->input('is_ongoing') == 1) {
+                    $is_ongoing_str = 'ongoing';
+                    $activeStatus = 'Active';
 
-                if($projectUpdate){
-                    return redirect()->back()->with('projectUpdateComplete','Project Update Complete, Check it now!');
-                }else{
-                    return redirect()->back()->with('projectUpdateFailed','Something went wrong');
+                    $checkDBProject->project_name = $request->input('project_name');
+                    $checkDBProject->project_header_image = $ProjectImageNewName;
+                    $checkDBProject->project_category_slug = $request->input('project_category_slug');
+                    $checkDBProject->project_keyword = $request->input('project_keyword');
+                    $checkDBProject->project_scope = $request->input('project_scope');
+                    $checkDBProject->project_type = $request->input('project_type');
+                    $checkDBProject->project_location = $request->input('project_location');
+                    $checkDBProject->project_description = $request->input('project_description');
+                    $checkDBProject->is_ongoing = $request->input('is_ongoing');
+                    $checkDBProject->is_ongoing_str = $is_ongoing_str;
+                    $checkDBProject->active_status = $activeStatus;
+                    $projectUpdate = $checkDBProject->save();
+
+                    if($projectUpdate){
+                        return redirect()->back()->with('projectUpdateComplete','Project Update Complete, Check it now!');
+                    }else{
+                        return redirect()->back()->with('projectUpdateFailed','Something went wrong');
+                    }
+                }elseif ($request->input('is_ongoing') == 0) {
+                    $is_ongoing_str = 'complete';
+                    $activeStatus = 'Active';
+
+                    $checkDBProject->project_name = $request->input('project_name');
+                    $checkDBProject->project_header_image = $ProjectImageNewName;
+                    $checkDBProject->project_category_slug = $request->input('project_category_slug');
+                    $checkDBProject->project_keyword = $request->input('project_keyword');
+                    $checkDBProject->project_scope = $request->input('project_scope');
+                    $checkDBProject->project_type = $request->input('project_type');
+                    $checkDBProject->project_location = $request->input('project_location');
+                    $checkDBProject->project_description = $request->input('project_description');
+                    $checkDBProject->is_ongoing = $request->input('is_ongoing');
+                    $checkDBProject->is_ongoing_str = $is_ongoing_str;
+                    $checkDBProject->active_status = $activeStatus;
+                    $projectUpdate = $checkDBProject->save();
+
+                    if($projectUpdate){
+                        return redirect()->back()->with('projectUpdateComplete','Project Update Complete, Check it now!');
+                    }else{
+                        return redirect()->back()->with('projectUpdateFailed','Something went wrong');
+                    }
+                }else {
+                    abort(403);
                 }
             }else{
                 abort(403);
@@ -230,20 +307,52 @@ class ProjectController extends Controller
                     }
                 }
                 // end multiple 
-                $checkDBProject->project_name = $request->input('project_name');
-                $checkDBProject->project_category_slug = $request->input('project_category_slug');
-                $checkDBProject->project_keyword = $request->input('project_keyword');
-                $checkDBProject->project_scope = $request->input('project_scope');
-                $checkDBProject->project_type = $request->input('project_type');
-                $checkDBProject->project_location = $request->input('project_location');
-                $checkDBProject->project_description = $request->input('project_description');
-                $checkDBProject->is_ongoing = $request->input('is_ongoing');
-                $projectUpdate = $checkDBProject->save();
+                if ($request->input('is_ongoing') == 1) {
+                    $is_ongoing_str = 'ongoing';
+                    $activeStatus = 'Active';
 
-                if($projectUpdate){
-                    return redirect()->back()->with('projectUpdateComplete','Project Update Complete, Check it now!');
-                }else{
-                    return redirect()->back()->with('projectUpdateFailed','Something went wrong');
+                    $checkDBProject->project_name = $request->input('project_name');
+                    $checkDBProject->project_header_image = $ProjectImageNewName;
+                    $checkDBProject->project_category_slug = $request->input('project_category_slug');
+                    $checkDBProject->project_keyword = $request->input('project_keyword');
+                    $checkDBProject->project_scope = $request->input('project_scope');
+                    $checkDBProject->project_type = $request->input('project_type');
+                    $checkDBProject->project_location = $request->input('project_location');
+                    $checkDBProject->project_description = $request->input('project_description');
+                    $checkDBProject->is_ongoing = $request->input('is_ongoing');
+                    $checkDBProject->is_ongoing_str = $is_ongoing_str;
+                    $checkDBProject->active_status = $activeStatus;
+                    $projectUpdate = $checkDBProject->save();
+
+                    if($projectUpdate){
+                        return redirect()->back()->with('projectUpdateComplete','Project Update Complete, Check it now!');
+                    }else{
+                        return redirect()->back()->with('projectUpdateFailed','Something went wrong');
+                    }
+                }elseif ($request->input('is_ongoing') == 0) {
+                    $is_ongoing_str = 'complete';
+                    $activeStatus = 'Active';
+
+                    $checkDBProject->project_name = $request->input('project_name');
+                    $checkDBProject->project_header_image = $ProjectImageNewName;
+                    $checkDBProject->project_category_slug = $request->input('project_category_slug');
+                    $checkDBProject->project_keyword = $request->input('project_keyword');
+                    $checkDBProject->project_scope = $request->input('project_scope');
+                    $checkDBProject->project_type = $request->input('project_type');
+                    $checkDBProject->project_location = $request->input('project_location');
+                    $checkDBProject->project_description = $request->input('project_description');
+                    $checkDBProject->is_ongoing = $request->input('is_ongoing');
+                    $checkDBProject->is_ongoing_str = $is_ongoing_str;
+                    $checkDBProject->active_status = $activeStatus;
+                    $projectUpdate = $checkDBProject->save();
+
+                    if($projectUpdate){
+                        return redirect()->back()->with('projectUpdateComplete','Project Update Complete, Check it now!');
+                    }else{
+                        return redirect()->back()->with('projectUpdateFailed','Something went wrong');
+                    }
+                }else {
+                    abort(403);
                 }
             }else{
                 abort(403);
@@ -254,13 +363,13 @@ class ProjectController extends Controller
     public function ProjectArchive(Request $request){
         $archiveId = $request->input('ProjectArchiveModalId');
         Project::where('id',$archiveId)->update([
-            'is_ongoing'=>2,
+            'active_status'=>'InActive',
         ]);
         return redirect()->back()->with('ProjectArchiveComplete','Project Archive Complete, check it now!');
     }
 
     public function ProjectArchiveList(){
-        $archiveProjectList = Project::where('is_ongoing',2)->get()->reverse();
+        $archiveProjectList = Project::where('active_status','InActive')->get()->reverse();
         return view('dashboard.project.archiveproject',[
             'archiveProjectList'=>$archiveProjectList,
         ]);
@@ -268,7 +377,9 @@ class ProjectController extends Controller
 
     public function ProjectArchiveRestore(Request $request){
         $restoreId = $request->input('ProjectRestoreBTNId');
-        $restoreFromDb = Project::where('id',$restoreId)->update(['is_ongoing'=>0]);
+        $restoreFromDb = Project::where('id',$restoreId)->update([
+            'active_status'=>'Active',
+        ]);
         if($restoreFromDb){
             return redirect()->back()->with('ProjectRestoreComplete','Project Restore Complete, make sure check in complete link!');
         }else{

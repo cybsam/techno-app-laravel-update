@@ -62,4 +62,16 @@ class ProjectCategoryController extends Controller
             return redirect()->back()->with('categoryDeleteProb',$msg);
         }
     }
+
+    public function showCategoryShowProject(Request $request,$category_slug){
+        if (!empty($category_slug)) {
+            $fetchData = Project::where('project_category_slug',$category_slug)->where('active_status','Active')->get()->reverse();
+            return view('dashboard.project.categorywiseproject',[
+                'fetchData'=>$fetchData
+            ]);
+        }else {
+            abort(403);
+        }
+        
+    }
 }

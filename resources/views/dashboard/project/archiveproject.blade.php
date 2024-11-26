@@ -50,7 +50,7 @@
         <tbody>
             @foreach ($archiveProjectList as $key => $archiveProject)
             <tr>
-                <td>{{ $archiveProject->id }}</td>
+                <td>{{ ++$key }}</td>
                 <td>{{ $archiveProject->project_name }}</td>
                 <td>{{ $archiveProject->project_category_slug }}</td>
                 <td><img src="{{ asset('public/image/project') }}/{{ $archiveProject->project_header_image }}" alt="{{ $archiveProject->project_name }}" height="40px" width="80px"></td>

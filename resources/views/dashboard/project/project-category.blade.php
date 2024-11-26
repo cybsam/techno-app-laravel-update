@@ -56,8 +56,8 @@
                     @foreach ($listAllCategory as $key => $listCategory)
                         <tr>
                             <td>{{ ++$key }}</td>
-                            <td>{{ $listCategory->project_category }}</td>
-                            <td>{{ $listCategory->project_category_slug }}</td>
+                            <td><a href="{{ route('SupUser.ProjectCategoryShowProject',['category_slug'=>$listCategory->project_category_slug]) }}">{{ $listCategory->project_category }}</a></td>
+                            <td><a href="{{ route('SupUser.ProjectCategoryShowProject',['category_slug'=>$listCategory->project_category_slug]) }}">{{ $listCategory->project_category_slug }}</a></td>
                             <td>
                                 <a href="{{ route('SupUser.ProjectCategoryDelete', ['category_id' => $listCategory->id]) }}"
                                     class="btn btn-danger"><i class="bi bi-trash" aria-hidden="true"></i></a>

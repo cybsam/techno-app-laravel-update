@@ -91,6 +91,7 @@ Route::prefix('en/Administrator')->middleware(['auth:web','isAdmin','isVerifyEma
     Route::post('Project/project/archive/restore',[App\Http\Controllers\Administrator\Project\ProjectController::class, 'ProjectArchiveRestore'])->name('SupUser.projectRestoreFromDB');
     //  category
     Route::get('Project/Category/Index',[App\Http\Controllers\Administrator\Project\ProjectCategoryController::class, 'showCategory'])->name('SupUser.ProjectCategoryShow');
+    Route::get('Project/Category/{category_slug}/Show/project',[App\Http\Controllers\Administrator\Project\ProjectCategoryController::class, 'showCategoryShowProject'])->name('SupUser.ProjectCategoryShowProject');
     Route::post('Project/Category/Insert',[App\Http\Controllers\Administrator\Project\ProjectCategoryController::class, 'ProjectCategoryInsert'])->name('SupUser.ProjectCategoryInsert');
     Route::post('Project/Category/Update',[App\Http\Controllers\Administrator\Project\ProjectCategoryController::class, 'ProjectCategoryUpdate'])->name('SupUser.ProjectCategoryUpdate');
     Route::get('Project/Category/Delete/{category_id}',[App\Http\Controllers\Administrator\Project\ProjectCategoryController::class, 'ProjectCategorydelete'])->name('SupUser.ProjectCategoryDelete');

@@ -314,7 +314,7 @@ class ProjectController extends Controller
                     $activeStatus = 'Active';
 
                     $checkDBProject->project_name = $request->input('project_name');
-                    $checkDBProject->project_header_image = $ProjectImageNewName;
+                    
                     $checkDBProject->project_category_slug = $request->input('project_category_slug');
                     $checkDBProject->project_keyword = $request->input('project_keyword');
                     $checkDBProject->project_scope = $request->input('project_scope');
@@ -337,7 +337,7 @@ class ProjectController extends Controller
                     $activeStatus = 'Active';
 
                     $checkDBProject->project_name = $request->input('project_name');
-                    $checkDBProject->project_header_image = $ProjectImageNewName;
+                    
                     $checkDBProject->project_category_slug = $request->input('project_category_slug');
                     $checkDBProject->project_keyword = $request->input('project_keyword');
                     $checkDBProject->project_scope = $request->input('project_scope');

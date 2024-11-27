@@ -27,6 +27,7 @@
                 <th scope="col">Project Name</th>
                 <th scope="col">Category</th>
                 <th scope="col">Image</th>
+                <th scope="col">Multiple Image</th>
                 <th scope="col">User</th>
                 <th scope="col">Action</th>
             </tr>
@@ -38,7 +39,20 @@
                 <td><a href="{{ route('SupUser.ProjectUpdate',['project_id'=>$onGoingProject->id,'project_slug'=>$onGoingProject->project_slug]) }}">{{ $onGoingProject->project_name }}</a></td>
                 <td>{{ $onGoingProject->project_category_slug }}</td>
                 <td><img src="{{ asset('public/image/project') }}/{{ $onGoingProject->project_header_image }}" alt="{{ $onGoingProject->project_name }}" height="40px" width="80px"></td>
+                <td>
+                    @php
+                        $multipleImage = DB::table('project_multiple_images')->where('project_id',$onGoingProject->id)->get();
+                        $countImage = count($multipleImage);
+                    @endphp
+                        
+                    @if ($countImage)
+                        <a href="{{ route('SupUserProjectMultile.show',['project_slg'=>$onGoingProject->project_category_slug,'project_id'=>$onGoingProject->id]) }}" class="badge text-bg-success">{{ $countImage }} Image</a>
+                    @else
+                        <span class="badge text-bg-info">Not Found</span>
+                    @endif
+                </td>
                 <td>{{ ucwords($onGoingProject->project_added_by) }}</td>
+                
                 <td>
                     <div class="button-group">
                         <a href="{{ route('SupUser.ProjectUpdate',['project_id'=>$onGoingProject->id,'project_slug'=>$onGoingProject->project_slug]) }}" class="btn btn-secondary btn-sm"><i class="bi bi-pencil-square"></i></a>

@@ -1,6 +1,6 @@
 @extends('layouts.SupUserMaster')
 
-@section('title', 'Insert New Project Details - Techno Apogee Limited')
+@section('title', 'Project category list - Techno Apogee')
 @section('SupUserContent')
 
 

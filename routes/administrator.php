@@ -95,8 +95,14 @@ Route::prefix('en/Administrator')->middleware(['auth:web','preventbackhistory','
     Route::post('Project/Category/Insert',[App\Http\Controllers\Administrator\Project\ProjectCategoryController::class, 'ProjectCategoryInsert'])->name('SupUser.ProjectCategoryInsert');
     Route::post('Project/Category/Update',[App\Http\Controllers\Administrator\Project\ProjectCategoryController::class, 'ProjectCategoryUpdate'])->name('SupUser.ProjectCategoryUpdate');
     Route::get('Project/Category/Delete/{category_id}',[App\Http\Controllers\Administrator\Project\ProjectCategoryController::class, 'ProjectCategorydelete'])->name('SupUser.ProjectCategoryDelete');
+    // multiple image
+    Route::get('Project/{project_slg}/{project_id}/multiple-image',[App\Http\Controllers\Administrator\Project\ProjectController::class, 'ProjectMultipleImage'])->name('SupUserProjectMultile.show');
+    Route::post('Project/multiple-project/update/save',[App\Http\Controllers\Administrator\Project\ProjectController::class, 'ProjectMultipleImageUpdate'])->name('SupUserProjectMultile.Update');
+    Route::get('Project/multiple-project/delete/{multiple_id}',[App\Http\Controllers\Administrator\Project\ProjectController::class, 'ProjectMultipleImageDelete'])->name('SupUserProjectMultile.Delete');
+    
+    // end multiple image
     // end Project
-
+    
     // product and service start
     Route::get('Product-and-service/index',[App\Http\Controllers\Administrator\ProductService\ProductServiceController::class, 'index'])->name('SupUser.ProductSerIndex');
     Route::get('Product-and-service/insert',[App\Http\Controllers\Administrator\ProductService\ProductServiceController::class, 'insertCheck'])->name('SupUser.ProductSerInsertChk');

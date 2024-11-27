@@ -75,7 +75,7 @@ class ProjectController extends Controller
                             ProjectMultipleImage::create([
                                 'project_id'=>$lastProjectId,
                                 'image'=>$multipleImageName,
-                                'added_by'=>Auth::user()->name
+                                'added_by'=>Auth::user()->username
                             ]);
                         }
                     }
@@ -114,7 +114,7 @@ class ProjectController extends Controller
                             ProjectMultipleImage::create([
                                 'project_id'=>$lastProjectId,
                                 'image'=>$multipleImageName,
-                                'added_by'=>Auth::user()->name
+                                'added_by'=>Auth::user()->username
                             ]);
                         }
                     }
@@ -221,7 +221,7 @@ class ProjectController extends Controller
                         ProjectMultipleImage::create([
                             'project_id'=>$multipleProjectId,
                             'image'=>$multipleImageName,
-                            'added_by'=>Auth::user()->name
+                            'added_by'=>Auth::user()->username
                         ]);
                     }
                 }
@@ -304,7 +304,7 @@ class ProjectController extends Controller
                         ProjectMultipleImage::create([
                             'project_id'=>$multipleProjectId,
                             'image'=>$multipleImageName,
-                            'added_by'=>Auth::user()->name
+                            'added_by'=>Auth::user()->username
                         ]);
                     }
                 }
@@ -413,6 +413,71 @@ class ProjectController extends Controller
         if($deleteFromDbProject){
             return redirect()->back()->with('ProjectDeleteComplete','Project Delete Complete!');
         }else{
+            abort(403);
+        }
+    }
+
+    // multiple image
+    public function ProjectMultipleImage(Request $request, $project_slg, $project_id){
+        $multipleImageGet = ProjectMultipleImage::where('project_id',$project_id)->get();
+        return view('dashboard.project.multiple.index',[
+            'multipleImageGet'=>$multipleImageGet,
+        ]);
+    }
+
+    public function ProjectMultipleImageUpdate(Request $request){
+        $request->validate([
+            'image'=>['required','mimes:jpg,jpeg,png,ico,gif','max:3000'],
+            'id'=>['required'],
+        ]);
+        if ($request->hasFile('image')) {
+            if($request->id){
+                $fetchImageFromDb = ProjectMultipleImage::where('id',$request->id)->first();
+                $imageDBFet = base_path('public/image/project/multipleimage/').$fetchImageFromDb->image;
+                unlink($imageDBFet);
+
+                $imageExtension = $request->file('image')->getClientOriginalExtension();
+                $randSrt = Carbon::now()->format('Y-m-d-H-i-s-u');
+                $nameImage = 'multiple'.'-'.rand(1,10000).'-'.$randSrt.'.'.$imageExtension;
+                $newImageBasePth = base_path('public/image/project/multipleimage/').$nameImage;
+                $imageFile = $request->file('image');
+                Image::make($imageFile)->resize(784,440)->save($newImageBasePth);
+                $updateDB = $fetchImageFromDb->update([
+                    'image'=>$nameImage,
+                    'added_by'=>Auth::user()->username
+                ]);
+                if ($updateDB) {
+                    return redirect()->back()->with('MultiSucc','Update Complete!');
+                }else {
+                    abort(403);
+                }
+                
+            }else {
+                return redirect()->back()->with('MultipleErr','Smart reload and select photo!');    
+            }
+        }else {
+            return redirect()->back()->with('MultipleErr','Image not selected!');
+        }
+    }
+    public function ProjectMultipleImageDelete(Request $request, $multiple_id){
+        
+        if ($multiple_id) {
+            $fetchImageFromDb = ProjectMultipleImage::where('id',$multiple_id)->first();
+            if ($fetchImageFromDb) {
+                $imageDBFet = base_path('public/image/project/multipleimage/').$fetchImageFromDb->image;
+                unlink($imageDBFet);
+                $delete = $fetchImageFromDb->delete();
+                if ($delete) {
+                    return redirect()->back()->with('MultiSucc','Delete Complete!');
+                }else {
+                    return redirect()->back()->with('MultipleErr','Something went wrong!');
+                }
+                
+            }else {
+                return redirect()->back()->with('MultipleErr','Image not Found!');
+            }
+
+        }else {
             abort(403);
         }
     }
